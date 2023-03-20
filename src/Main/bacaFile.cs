@@ -2,7 +2,7 @@
 
 namespace bacaFile;
 public class TXT{
-	public void toMatrix(string filename)
+	public char[,] toMatrix(string filename)
 	{
         String input = File.ReadAllText(filename);
         int i = 0, j = 0;
@@ -26,13 +26,8 @@ public class TXT{
             i++;
         }
 
-        for (int w = 0; w < baris; w++)
-        {
-            for (int h = 0; h < kolom; h++)
-            {
-                Console.Write(result[w, h] + " ");
-            }
-            Console.WriteLine();
-        }
+        return result;
+
+        
     }
 }
