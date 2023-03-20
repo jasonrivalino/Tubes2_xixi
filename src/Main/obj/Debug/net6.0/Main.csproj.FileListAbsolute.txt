@@ -1,0 +1,15 @@
+C:\Users\Asus\OneDrive - Institut Teknologi Bandung\Perkuliahan\Semester 4\IF2211 Strategi Algoritma\Tugas Besar\Tubes 2\src\Main\bin\Debug\net6.0\Main.exe
+C:\Users\Asus\OneDrive - Institut Teknologi Bandung\Perkuliahan\Semester 4\IF2211 Strategi Algoritma\Tugas Besar\Tubes 2\src\Main\bin\Debug\net6.0\Main.deps.json
+C:\Users\Asus\OneDrive - Institut Teknologi Bandung\Perkuliahan\Semester 4\IF2211 Strategi Algoritma\Tugas Besar\Tubes 2\src\Main\bin\Debug\net6.0\Main.runtimeconfig.json
+C:\Users\Asus\OneDrive - Institut Teknologi Bandung\Perkuliahan\Semester 4\IF2211 Strategi Algoritma\Tugas Besar\Tubes 2\src\Main\bin\Debug\net6.0\Main.dll
+C:\Users\Asus\OneDrive - Institut Teknologi Bandung\Perkuliahan\Semester 4\IF2211 Strategi Algoritma\Tugas Besar\Tubes 2\src\Main\bin\Debug\net6.0\Main.pdb
+C:\Users\Asus\OneDrive - Institut Teknologi Bandung\Perkuliahan\Semester 4\IF2211 Strategi Algoritma\Tugas Besar\Tubes 2\src\Main\obj\Debug\net6.0\Main.csproj.AssemblyReference.cache
+C:\Users\Asus\OneDrive - Institut Teknologi Bandung\Perkuliahan\Semester 4\IF2211 Strategi Algoritma\Tugas Besar\Tubes 2\src\Main\obj\Debug\net6.0\Main.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Asus\OneDrive - Institut Teknologi Bandung\Perkuliahan\Semester 4\IF2211 Strategi Algoritma\Tugas Besar\Tubes 2\src\Main\obj\Debug\net6.0\Main.AssemblyInfoInputs.cache
+C:\Users\Asus\OneDrive - Institut Teknologi Bandung\Perkuliahan\Semester 4\IF2211 Strategi Algoritma\Tugas Besar\Tubes 2\src\Main\obj\Debug\net6.0\Main.AssemblyInfo.cs
+C:\Users\Asus\OneDrive - Institut Teknologi Bandung\Perkuliahan\Semester 4\IF2211 Strategi Algoritma\Tugas Besar\Tubes 2\src\Main\obj\Debug\net6.0\Main.csproj.CoreCompileInputs.cache
+C:\Users\Asus\OneDrive - Institut Teknologi Bandung\Perkuliahan\Semester 4\IF2211 Strategi Algoritma\Tugas Besar\Tubes 2\src\Main\obj\Debug\net6.0\Main.dll
+C:\Users\Asus\OneDrive - Institut Teknologi Bandung\Perkuliahan\Semester 4\IF2211 Strategi Algoritma\Tugas Besar\Tubes 2\src\Main\obj\Debug\net6.0\refint\Main.dll
+C:\Users\Asus\OneDrive - Institut Teknologi Bandung\Perkuliahan\Semester 4\IF2211 Strategi Algoritma\Tugas Besar\Tubes 2\src\Main\obj\Debug\net6.0\Main.pdb
+C:\Users\Asus\OneDrive - Institut Teknologi Bandung\Perkuliahan\Semester 4\IF2211 Strategi Algoritma\Tugas Besar\Tubes 2\src\Main\obj\Debug\net6.0\Main.genruntimeconfig.cache
+C:\Users\Asus\OneDrive - Institut Teknologi Bandung\Perkuliahan\Semester 4\IF2211 Strategi Algoritma\Tugas Besar\Tubes 2\src\Main\obj\Debug\net6.0\ref\Main.dll

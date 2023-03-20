@@ -1,0 +1,15 @@
+C:\Users\Asus\OneDrive - Institut Teknologi Bandung\Perkuliahan\Semester 4\IF2211 Strategi Algoritma\Tugas Besar\Tubes 2\src\fromTXT\fromTXT\obj\Debug\net6.0\fromTXT.csproj.AssemblyReference.cache
+C:\Users\Asus\OneDrive - Institut Teknologi Bandung\Perkuliahan\Semester 4\IF2211 Strategi Algoritma\Tugas Besar\Tubes 2\src\fromTXT\fromTXT\obj\Debug\net6.0\fromTXT.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Asus\OneDrive - Institut Teknologi Bandung\Perkuliahan\Semester 4\IF2211 Strategi Algoritma\Tugas Besar\Tubes 2\src\fromTXT\fromTXT\obj\Debug\net6.0\fromTXT.AssemblyInfoInputs.cache
+C:\Users\Asus\OneDrive - Institut Teknologi Bandung\Perkuliahan\Semester 4\IF2211 Strategi Algoritma\Tugas Besar\Tubes 2\src\fromTXT\fromTXT\obj\Debug\net6.0\fromTXT.AssemblyInfo.cs
+C:\Users\Asus\OneDrive - Institut Teknologi Bandung\Perkuliahan\Semester 4\IF2211 Strategi Algoritma\Tugas Besar\Tubes 2\src\fromTXT\fromTXT\obj\Debug\net6.0\fromTXT.csproj.CoreCompileInputs.cache
+C:\Users\Asus\OneDrive - Institut Teknologi Bandung\Perkuliahan\Semester 4\IF2211 Strategi Algoritma\Tugas Besar\Tubes 2\src\fromTXT\fromTXT\bin\Debug\net6.0\fromTXT.exe
+C:\Users\Asus\OneDrive - Institut Teknologi Bandung\Perkuliahan\Semester 4\IF2211 Strategi Algoritma\Tugas Besar\Tubes 2\src\fromTXT\fromTXT\bin\Debug\net6.0\fromTXT.deps.json
+C:\Users\Asus\OneDrive - Institut Teknologi Bandung\Perkuliahan\Semester 4\IF2211 Strategi Algoritma\Tugas Besar\Tubes 2\src\fromTXT\fromTXT\bin\Debug\net6.0\fromTXT.runtimeconfig.json
+C:\Users\Asus\OneDrive - Institut Teknologi Bandung\Perkuliahan\Semester 4\IF2211 Strategi Algoritma\Tugas Besar\Tubes 2\src\fromTXT\fromTXT\bin\Debug\net6.0\fromTXT.dll
+C:\Users\Asus\OneDrive - Institut Teknologi Bandung\Perkuliahan\Semester 4\IF2211 Strategi Algoritma\Tugas Besar\Tubes 2\src\fromTXT\fromTXT\bin\Debug\net6.0\fromTXT.pdb
+C:\Users\Asus\OneDrive - Institut Teknologi Bandung\Perkuliahan\Semester 4\IF2211 Strategi Algoritma\Tugas Besar\Tubes 2\src\fromTXT\fromTXT\obj\Debug\net6.0\fromTXT.dll
+C:\Users\Asus\OneDrive - Institut Teknologi Bandung\Perkuliahan\Semester 4\IF2211 Strategi Algoritma\Tugas Besar\Tubes 2\src\fromTXT\fromTXT\obj\Debug\net6.0\refint\fromTXT.dll
+C:\Users\Asus\OneDrive - Institut Teknologi Bandung\Perkuliahan\Semester 4\IF2211 Strategi Algoritma\Tugas Besar\Tubes 2\src\fromTXT\fromTXT\obj\Debug\net6.0\fromTXT.pdb
+C:\Users\Asus\OneDrive - Institut Teknologi Bandung\Perkuliahan\Semester 4\IF2211 Strategi Algoritma\Tugas Besar\Tubes 2\src\fromTXT\fromTXT\obj\Debug\net6.0\fromTXT.genruntimeconfig.cache
+C:\Users\Asus\OneDrive - Institut Teknologi Bandung\Perkuliahan\Semester 4\IF2211 Strategi Algoritma\Tugas Besar\Tubes 2\src\fromTXT\fromTXT\obj\Debug\net6.0\ref\fromTXT.dll
