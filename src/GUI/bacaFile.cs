@@ -14,8 +14,8 @@ namespace bacaFile
             int baris = data.Length;
             int kolom = data[0].Split(' ').Length;
 
-            Console.WriteLine("baris: " + baris);
-            Console.WriteLine("kolom: " + kolom);
+            //Console.WriteLine("baris: " + baris);
+            //Console.WriteLine("kolom: " + kolom);
 
             char[,] result = new char[baris, kolom];
             foreach (var row in input.Split('\n'))

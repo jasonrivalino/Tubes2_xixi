@@ -31,3 +31,14 @@ D:\JASON\KULIAH ITB\MATKUL\SEMESTER 4\Strategi Algoritma\Tugas Besar 2\GUI Demo\
 D:\JASON\KULIAH ITB\MATKUL\SEMESTER 4\Strategi Algoritma\Tugas Besar 2\GUI Demo\GUI Demo\obj\Debug\GUIDemo.csproj.CoreCompileInputs.cache
 D:\JASON\KULIAH ITB\MATKUL\SEMESTER 4\Strategi Algoritma\Tugas Besar 2\GUI Demo\GUI Demo\obj\Debug\GUI Demo.exe
 D:\JASON\KULIAH ITB\MATKUL\SEMESTER 4\Strategi Algoritma\Tugas Besar 2\GUI Demo\GUI Demo\obj\Debug\GUI Demo.pdb
+D:\JASON\KULIAH ITB\MATKUL\SEMESTER 4\Strategi Algoritma\Tugas Besar 2\Tubes2_xixi\src\GUI\bin\Debug\GUI Demo.exe.config
+D:\JASON\KULIAH ITB\MATKUL\SEMESTER 4\Strategi Algoritma\Tugas Besar 2\Tubes2_xixi\src\GUI\bin\Debug\GUI Demo.exe
+D:\JASON\KULIAH ITB\MATKUL\SEMESTER 4\Strategi Algoritma\Tugas Besar 2\Tubes2_xixi\src\GUI\bin\Debug\GUI Demo.pdb
+D:\JASON\KULIAH ITB\MATKUL\SEMESTER 4\Strategi Algoritma\Tugas Besar 2\Tubes2_xixi\src\GUI\obj\Debug\GUIDemo.csproj.AssemblyReference.cache
+D:\JASON\KULIAH ITB\MATKUL\SEMESTER 4\Strategi Algoritma\Tugas Besar 2\Tubes2_xixi\src\GUI\obj\Debug\GUIDemo.csproj.SuggestedBindingRedirects.cache
+D:\JASON\KULIAH ITB\MATKUL\SEMESTER 4\Strategi Algoritma\Tugas Besar 2\Tubes2_xixi\src\GUI\obj\Debug\GUI_Demo.Form1.resources
+D:\JASON\KULIAH ITB\MATKUL\SEMESTER 4\Strategi Algoritma\Tugas Besar 2\Tubes2_xixi\src\GUI\obj\Debug\GUI_Demo.Properties.Resources.resources
+D:\JASON\KULIAH ITB\MATKUL\SEMESTER 4\Strategi Algoritma\Tugas Besar 2\Tubes2_xixi\src\GUI\obj\Debug\GUIDemo.csproj.GenerateResource.cache
+D:\JASON\KULIAH ITB\MATKUL\SEMESTER 4\Strategi Algoritma\Tugas Besar 2\Tubes2_xixi\src\GUI\obj\Debug\GUIDemo.csproj.CoreCompileInputs.cache
+D:\JASON\KULIAH ITB\MATKUL\SEMESTER 4\Strategi Algoritma\Tugas Besar 2\Tubes2_xixi\src\GUI\obj\Debug\GUI Demo.exe
+D:\JASON\KULIAH ITB\MATKUL\SEMESTER 4\Strategi Algoritma\Tugas Besar 2\Tubes2_xixi\src\GUI\obj\Debug\GUI Demo.pdb
