@@ -1,12 +1,63 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace ConsoleApp2
+namespace ConsoleApp3
 {
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            //char[,] arr = {{'K','R','R','R'}, {'X','R','X','X'}, {'X','T','X','X'}, {'X','R','R','T'}};
+            //char[,] arr = { { 'K', 'R', 'R', 'R' }, { 'X', 'R', 'X', 'R' }, { 'X', 'R', 'X', 'R' }, { 'X', 'R', 'R', 'T' } };
+            char[,] arr = { { 'T', 'R', 'R', 'T', 'R', 'R', 'X' }, { 'X', 'R', 'X', 'R', 'X', 'X', 'X' }, { 'X', 'R', 'R', 'T', 'R', 'R', 'X' }, { 'X', 'R', 'X', 'X', 'X', 'X', 'X' }, { 'X', 'R', 'X', 'X', 'R', 'X', 'X' }, { 'X', 'R', 'X', 'X', 'R', 'X', 'X' }, { 'K', 'R', 'R', 'R', 'R', 'R', 'R' } };
+            //char[,] arr = { { 'K', 'R', 'R', 'R', 'R', 'R', 'X' }, { 'X', 'R', 'X', 'T', 'X', 'R', 'R' }, { 'X', 'T', 'X', 'R', 'X', 'R', 'X' }, { 'X', 'R', 'X', 'X', 'X', 'T', 'X' } };
+            //char[,] arr = { { 'K', 'R', 'R', 'X', 'X', 'X' }, { 'X', 'X', 'R', 'R', 'R', 'T' }, { 'T', 'R', 'R', 'X', 'X', 'R' }, { 'R', 'X', 'R', 'R', 'R', 'R' } };
+            //char[,] arr = { { 'K', 'X', 'X', 'X', 'X', 'X' }, { 'R', 'R', 'X', 'X', 'X', 'X' }, { 'R', 'R', 'R', 'X', 'X', 'X' }, { 'R', 'R', 'R', 'R', 'X', 'X' }, { 'R', 'R', 'R', 'R', 'R', 'X' }, { 'R', 'R', 'R', 'R', 'R', 'T' } };
+            //char[,] arr = { { 'X', 'X', 'X', 'X', 'X', 'X' }, { 'X', 'T', 'K', 'R', 'T', 'X' }, { 'X', 'X', 'X', 'X', 'X', 'X' } };
+            Algorithm.printMatrix(arr);
+            Stack<Point> treasure = new Stack<Point>();
+            treasure = Algorithm.stackTreasure(arr);
+            Algorithm.printStack(treasure);
+            //Point p = new Point(1, 3);
+            //treasureArrived(treasure, p);
+            //printStack(treasure);
+            Point K =  Algorithm.findK(arr);
+            Stack<Point> visited = new Stack<Point>();
+            visited.Push(K);
+            Algorithm.printStack(visited);
+            Stack<Point> unvisited = new Stack<Point>();
+            Stack<Point> backtracking = new Stack<Point>();
+            Stack<int> countNode = new Stack<int>();
+            int countBacktracking = 0;
+            while (treasure.Count != 0)
+            {
+                Console.WriteLine("Visited sekarang: " + visited.Peek().x + "," + visited.Peek().y);
+                Algorithm.treasureArrived(treasure, visited.Peek());
+                Console.WriteLine("Treasure skrg bgt");
+                Algorithm.printStack(treasure);
+                countBacktracking = Algorithm.adjacentPoint(arr, visited, unvisited, backtracking, countBacktracking, countNode);
+                //Console.WriteLine("Backtracking skrg");
+                //Algorithm.printStack(backtracking);
+                //Console.WriteLine("Unvisited skrg");
+                //Algorithm.printStack(unvisited);
+                //Console.WriteLine("Visited skrg");
+                //Algorithm.printStack(visited);
+                if (treasure.Count != 0)
+                {
+                    Algorithm.move(visited, unvisited);
+                }
+            }
+            Console.WriteLine("Jalannya lewat mana sihhh");
+            Algorithm.printStack(visited);
+            int count = visited.Count;
+            string direction = Algorithm.printStep(visited, count);
+            Console.WriteLine(direction);
+            Console.WriteLine();
+            Console.WriteLine("Jumlah node yang dilewati: " + Algorithm.countNode(visited));
+            Console.ReadLine();
+        }
+    }
+
     public class Point
     {
         public int x { get; set; }
@@ -36,51 +87,11 @@ namespace ConsoleApp2
         {
             return (x + y).GetHashCode();
         }
-
     }
-    internal class Program
+    
+    public class Algorithm
     {
-        static void Main(string[] args)
-        {
-            //char[,] arr = {{'K','R','R','R'}, {'X','R','X','X'}, {'X','T','X','X'}, {'X','R','R','T'}};
-            //char[,] arr = { { 'K', 'R', 'R', 'R' }, { 'X', 'R', 'X', 'R' }, { 'X', 'R', 'X', 'R' }, { 'X', 'R', 'R', 'T' } };
-            char[,] arr = { { 'T', 'R', 'R', 'T', 'R', 'R', 'X' }, { 'X', 'R', 'X', 'R', 'X', 'X', 'X' }, { 'X', 'R', 'R', 'T', 'R', 'R', 'X' }, { 'X', 'R', 'X', 'X', 'X', 'X', 'X' }, { 'X', 'R', 'X', 'X', 'R', 'X', 'X' }, { 'X', 'R', 'X', 'X', 'R', 'X', 'X' }, { 'K', 'R', 'R', 'R', 'R', 'R', 'R' } };
-            //char[,] arr = { { 'K', 'R', 'R', 'R', 'R', 'R', 'X' }, { 'X', 'R', 'X', 'T', 'X', 'R', 'R' }, { 'X', 'T', 'X', 'R', 'X', 'R', 'X' }, { 'X', 'R', 'X', 'X', 'X', 'T', 'X' } };
-            //char[,] arr = { { 'K', 'R', 'R', 'X', 'X', 'X' }, { 'X', 'X', 'R', 'R', 'R', 'T' }, { 'T', 'R', 'R', 'X', 'X', 'R' }, { 'R', 'X', 'R', 'R', 'R', 'R' } };
-            //char[,] arr = { { 'K', 'X', 'X', 'X', 'X', 'X' }, { 'R', 'R', 'X', 'X', 'X', 'X' }, { 'R', 'R', 'R', 'X', 'X', 'X' }, { 'R', 'R', 'R', 'R', 'X', 'X' }, { 'R', 'R', 'R', 'R', 'R', 'X' }, { 'R', 'R', 'R', 'R', 'R', 'T' } };
-            printMatrix(arr);
-            Stack<Point> treasure = new Stack<Point>();
-            treasure = stackTreasure(arr);
-            printStack(treasure);
-            //Point p = new Point(1, 3);
-            //treasureArrived(treasure, p);
-            //printStack(treasure);
-            Point K = findK(arr);
-            Stack<Point> visited = new Stack<Point>();
-            visited.Push(K);
-            printStack(visited);
-            Stack<Point> unvisited = new Stack<Point>();
-            while (treasure.Count != 0)
-            {
-                Console.WriteLine("Visited sekarang: " + visited.Peek().x + "," + visited.Peek().y);
-                treasureArrived(treasure, visited.Peek());
-                Console.WriteLine("Treasure skrg bgt");
-                printStack(treasure);
-                adjacentPoint(arr, visited, unvisited);
-                Console.WriteLine("Unvisited skrg");
-                printStack(unvisited);
-                if (treasure.Count != 0)
-                {
-                    move(visited, unvisited);
-                }
-            }
-            Console.WriteLine("Jalannya lewat mana sihhh");
-            printStack(visited);
-            int count = visited.Count;
-            printStep(visited, count);
-            Console.ReadLine();
-        }
-        static Stack<Point> stackTreasure(char[,] arr)
+        public static Stack<Point> stackTreasure(char[,] arr)
         {
             Stack<Point> treasure = new Stack<Point>();
             for (int i = 0; i < arr.GetLength(0); i++)
@@ -95,20 +106,19 @@ namespace ConsoleApp2
             }
             return treasure;
         }
-        static void printStep(Stack<Point> s, int count)
+        public static string printStep(Stack<Point> s, int count)
         {
+            string direction;
             if (s.Count == 1)
-                return;
+                return "";
             Point temp = s.Peek();
             s.Pop();
             Point temp1 = s.Peek();
-            printStep(s, count);
-            checkAdjacent(temp1, temp);
-            if (s.Count != count-1)
-                Console.Write(" - ");
+            direction = printStep(s, count) + "" + checkAdjacent(temp1, temp);
             s.Push(temp);
+            return direction;
         }
-        static void printStack(Stack<Point> s)
+        public static void printStack(Stack<Point> s)
         {
             if (s.Count == 0)
                 return;
@@ -118,7 +128,7 @@ namespace ConsoleApp2
             Console.WriteLine(temp.x + "," + temp.y);
             s.Push(temp);
         }
-        static void treasureArrived(Stack<Point> s, Point p)
+        public static void treasureArrived(Stack<Point> s, Point p)
         {
             if (s.Count == 0)
                 return;
@@ -128,9 +138,9 @@ namespace ConsoleApp2
             if ((p.x != temp.x) | (p.y != temp.y))
             {
                 s.Push(temp);
-            }       
+            }
         }
-        static void printMatrix(char[,] arr)
+        public static void printMatrix(char[,] arr)
         {
             for (int i = 0; i < arr.GetLength(0); i++)
             {
@@ -141,7 +151,7 @@ namespace ConsoleApp2
                 Console.WriteLine();
             }
         }
-        static Point findK(char[,] arr)
+        public static Point findK(char[,] arr)
         {
             Point p = new Point();
             for (int i = 0; i < arr.GetLength(0); i++)
@@ -156,54 +166,115 @@ namespace ConsoleApp2
             }
             return p;
         }
-        static void adjacentPoint(char[,] arr, Stack<Point> visited, Stack<Point> unvisited)
+        public static int adjacentPoint(char[,] arr, Stack<Point> visited, Stack<Point> unvisited, Stack<Point> backtracking, int countBacktracking, Stack<int> countNode)
         {
+            //Console.WriteLine("count" + countBacktracking);
+            Stack<Point> treasure = new Stack<Point>();
+            treasure = Algorithm.stackTreasure(arr);
+            int count = 0;
             Point p = visited.Peek();
             if ((p.x != 0) && (arr[p.x - 1, p.y] != 'X') && (!visited.Contains(new Point(p.x - 1, p.y))))
             {
                 Point p1 = new Point(p.x - 1, p.y);
                 unvisited.Push(p1);
+                count++;
             }
             if ((p.y != 0) && (arr[p.x, p.y - 1] != 'X') && (!visited.Contains(new Point(p.x, p.y - 1))))
             {
                 Point p1 = new Point(p.x, p.y - 1);
                 unvisited.Push(p1);
+                count++;
             }
             if ((p.x != arr.GetLength(0) - 1) && (arr[p.x + 1, p.y] != 'X') && (!visited.Contains(new Point(p.x + 1, p.y))))
             {
                 Point p1 = new Point(p.x + 1, p.y);
                 unvisited.Push(p1);
+                count++;
             }
             if ((p.y != arr.GetLength(1) - 1) && (arr[p.x, p.y + 1] != 'X') && (!visited.Contains(new Point(p.x, p.y + 1))))
             {
                 Point p1 = new Point(p.x, p.y + 1);
                 unvisited.Push(p1);
-            } 
-            else
-            {
-                Console.WriteLine("Bactraking nih");
+                count++;
             }
+            if (backtracking.Count != 0 && count != 0)
+            {
+                countBacktracking++;
+                backtracking.Push(p);
+                //Console.WriteLine("Masuk sini");
+            }
+            if (count > 1)
+            {
+                if (countBacktracking != 0)
+                {
+                    countNode.Push(countBacktracking);
+                }
+                Console.WriteLine("Simpangan");
+                countBacktracking = 1;
+                backtracking.Push(p);
+                
+            }
+            Algorithm.treasureArrived(treasure, visited.Peek());
+            if (count == 0 && treasure.Count != 0)
+            {
+                if (countBacktracking != 0)
+                {
+                    countNode.Push(countBacktracking);
+                    int tempCount = countNode.Pop();
+                    while (tempCount != 0)
+                    {
+                        Point temp = backtracking.Pop();
+                        visited.Push(temp);
+                        tempCount--;
+                    }
+                    if (backtracking.Count != 0)
+                    {
+                        Point temp = visited.Peek();
+                        Point temp1 = backtracking.Peek();
+                        if (checkAdjacentBool(temp,temp1))
+                        {
+                            int tempCount1 = countNode.Pop();
+                            while (tempCount1 != 0)
+                            {
+                                Point temp2 = backtracking.Pop();
+                                visited.Push(temp2);
+                                tempCount1--;
+                            }
+                        }
+                    }
+                }
+                Console.WriteLine("Backtraking nih");
+                countBacktracking = 0;
+            }
+            return countBacktracking;
         }
-        static void move(Stack<Point> visited, Stack<Point> unvisited)
+
+        public static void move(Stack<Point> visited, Stack<Point> unvisited)
         {
             Point temp = unvisited.Pop();
             visited.Push(temp);
         }
-        static void checkAdjacent(Point p1, Point p2)
+        public static string checkAdjacent(Point p1, Point p2)
         {
+            string direction;
             if (p1.x == p2.x + 1 && p1.y == p2.y)
-                Console.Write("U");
+                //Console.Write("U");
+                direction = "U";
             else if (p1.x == p2.x - 1 && p1.y == p2.y)
-                Console.Write("D");
+                //Console.Write("D");
+                direction = "D";
             else if (p1.x == p2.x && p1.y == p2.y + 1)
-                Console.Write("L");
+                //Console.Write("L");
+                direction = "L";
             else if (p1.x == p2.x && p1.y == p2.y - 1)
-                Console.Write("R");
+                //Console.Write("R");
+                direction = "R";
             else
-                Console.Write("Backtracking sampai di (" + p2.x + "," + p2.y + ")");
+                //Console.Write("Backtracking sampai di (" + p2.x + "," + p2.y + ")");
+                direction = "Backtracking sampai di (" + p2.x + "," + p2.y + ")";
+            return direction;
         }
-        /*
-        static bool checkAdjacentBool(Point p1, Point p2)
+        public static bool checkAdjacentBool(Point p1, Point p2)
         {
             bool flag = false;
             if (p1.x == p2.x + 1 && p1.y == p2.y)
@@ -216,6 +287,17 @@ namespace ConsoleApp2
                 flag = true;
             return flag;
         }
-        */
+        public static int countNode (Stack<Point> s)
+        {
+            if (s.Count == 0)
+                return 0;
+            Point temp = s.Peek();
+            s.Pop();
+            countNode(s);
+            if (!s.Contains(temp))
+                s.Push(temp);
+            return s.Count;
+        }
     }
 }
+
