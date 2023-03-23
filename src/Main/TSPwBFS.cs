@@ -1,22 +1,24 @@
 ﻿using System;
 
-namespace BFS
+namespace TSPwBFS
 {
-    public class cariBFS
+    public class cariTSP
     {
-        public static string checkAdjacent(int x1, int y1, int x2, int y2)
+        public string checkAdjacent(int x1, int y1, int x2, int y2)
         {
             if (x1 == x2 + 1 && y1 == y2)
                 return "U";
-            else if (x1 == y2 - 1 && y1 == y2)
+            else if (x1 == x2 - 1 && y1 == y2)
                 return "D";
-            else if (x1 == y2 && y1 == y2 + 1)
+            else if (x1 == x2 && y1 == y2 + 1)
                 return "L";
-            else if (x1 == y2 && y1 == y2 - 1)
+            else if (x1 == x2 && y1 == y2 - 1)
                 return "R";
+            else
+                return "";
         }
 
-        public static string printStep (int[,] array)
+        public string printStep(int[,] array)
         {
             string step = "";
             for (int i = 0; i < (array.Length / 2) - 1; i++)
@@ -38,7 +40,7 @@ namespace BFS
                         lokasiPlayer[0] = k;
                         lokasiPlayer[1] = l;
                         //break;
-                        // Console.WriteLine("FOUND");
+                        Console.WriteLine("FOUND");
                     }
                 }
 
@@ -60,11 +62,9 @@ namespace BFS
 
         public int[,] tambahTitik(int[,] array, int x, int y)
         {
-            Console.WriteLine("Bagian tambah titik");
-            Console.WriteLine("x: " + x + " y: " + y);
             int panjang = (array.Length / 2);
             int[,] arrayBaru = new int[panjang + 1, 2];
-            arrayBaru[0, 0] = x; 
+            arrayBaru[0, 0] = x;
             arrayBaru[0, 1] = y;
 
             for (int i = 0; i < panjang; i++)
@@ -72,23 +72,15 @@ namespace BFS
                 arrayBaru[i + 1, 0] = array[i, 0];
                 arrayBaru[i + 1, 1] = array[i, 1];
             }
-            Console.Write("Array baru: ");
-            for(int i = 0; i<panjang + 1; i++)
-            {
-                Console.Write("[" + arrayBaru[i, 0] + "," + arrayBaru[i, 1] + "], ");
-            }
-            Console.WriteLine();
-            Console.WriteLine("-----------------");
-
             return arrayBaru;
         }
 
         public int[,] cariJalan(char[,] map, int baris, int kolom, int[] player)
         {
             Queue<int[,]> queue = new Queue<int[,]>();
-            cariBFS tiwal = new cariBFS();
+            cariTSP tiwal = new cariTSP();
             int[] titikAwal = tiwal.cariPlayer(map, baris, kolom);
-            // Console.WriteLine("tiwal "+titikAwal[0] + "," + titikAwal[1]);
+            Console.WriteLine("tiwal " + titikAwal[0] + "," + titikAwal[1]);
             int jumlahT = tiwal.jumlahTreasure(map, baris, kolom);
 
             queue.Enqueue(new int[,] { { titikAwal[0], titikAwal[1] } });
@@ -99,7 +91,7 @@ namespace BFS
             {
                 bool pojok = false;
                 int[,] simpul = queue.Dequeue();
-                // Console.Write("Queue diambil: ");
+                Console.Write("Queue diambil: ");
                 for (int c = 0; c < (simpul.Length / 2); c++)
                 {
                     Console.Write("[" + simpul[c, 0] + "," + simpul[c, 1] + "], ");
@@ -121,8 +113,8 @@ namespace BFS
                             jumlahT--;
                             Console.WriteLine("Ketemu Treasure");
                         }
-                        cariBFS cariBFS = new cariBFS();
-                        int[,] titikBaru = cariBFS.tambahTitik(simpul, xSaatIni, (ySaatIni + 1));
+                        cariTSP cariTSP = new cariTSP();
+                        int[,] titikBaru = cariTSP.tambahTitik(simpul, xSaatIni, (ySaatIni + 1));
                         queue.Enqueue(titikBaru);
                         Console.WriteLine("kanan " + xSaatIni + "," + (ySaatIni + 1));
                     }
@@ -135,8 +127,8 @@ namespace BFS
                             jumlahT--;
                             Console.WriteLine("Ketemu Treasure");
                         }
-                        cariBFS cariBFS = new cariBFS();
-                        int[,] titikBaru = cariBFS.tambahTitik(simpul, (xSaatIni + 1), ySaatIni);
+                        cariTSP cariTSP = new cariTSP();
+                        int[,] titikBaru = cariTSP.tambahTitik(simpul, (xSaatIni + 1), ySaatIni);
                         queue.Enqueue(titikBaru);
                         Console.WriteLine("bawah " + (xSaatIni + 1) + "," + ySaatIni);
                     }
@@ -153,8 +145,8 @@ namespace BFS
                             jumlahT--;
                             Console.WriteLine("Ketemu Treasure");
                         }
-                        cariBFS cariBFS = new cariBFS();
-                        int[,] titikBaru = cariBFS.tambahTitik(simpul, (xSaatIni + 1), ySaatIni);
+                        cariTSP cariTSP = new cariTSP();
+                        int[,] titikBaru = cariTSP.tambahTitik(simpul, (xSaatIni + 1), ySaatIni);
                         queue.Enqueue(titikBaru);
                         Console.WriteLine("turun " + (xSaatIni + 1) + "," + ySaatIni);
                     }
@@ -166,8 +158,8 @@ namespace BFS
                             jumlahT--;
                             Console.WriteLine("Ketemu Treasure");
                         }
-                        cariBFS cariBFS = new cariBFS();
-                        int[,] titikBaru = cariBFS.tambahTitik(simpul, xSaatIni, (ySaatIni - 1));
+                        cariTSP cariTSP = new cariTSP();
+                        int[,] titikBaru = cariTSP.tambahTitik(simpul, xSaatIni, (ySaatIni - 1));
                         queue.Enqueue(titikBaru);
                         Console.WriteLine("kiri " + xSaatIni + "," + (ySaatIni - 1));
                     }
@@ -186,8 +178,8 @@ namespace BFS
                             jumlahT--;
                             Console.WriteLine("Ketemu Treasure");
                         }
-                        cariBFS cariBFS = new cariBFS();
-                        int[,] titikBaru = cariBFS.tambahTitik(simpul, xSaatIni, (ySaatIni + 1));
+                        cariTSP cariTSP = new cariTSP();
+                        int[,] titikBaru = cariTSP.tambahTitik(simpul, xSaatIni, (ySaatIni + 1));
                         queue.Enqueue(titikBaru);
                         Console.WriteLine("kanan " + xSaatIni + "," + (ySaatIni + 1));
                     }
@@ -200,8 +192,8 @@ namespace BFS
                             jumlahT--;
                             Console.WriteLine("Ketemu Treasure");
                         }
-                        cariBFS cariBFS = new cariBFS();
-                        int[,] titikBaru = cariBFS.tambahTitik(simpul, (xSaatIni - 1), ySaatIni);
+                        cariTSP cariTSP = new cariTSP();
+                        int[,] titikBaru = cariTSP.tambahTitik(simpul, (xSaatIni - 1), ySaatIni);
                         queue.Enqueue(titikBaru);
                         Console.WriteLine("atas " + (xSaatIni - 1) + "," + ySaatIni);
                     }
@@ -219,8 +211,8 @@ namespace BFS
                             jumlahT--;
                             Console.WriteLine("Ketemu Treasure");
                         }
-                        cariBFS cariBFS = new cariBFS();
-                        int[,] titikBaru = cariBFS.tambahTitik(simpul, xSaatIni, ySaatIni - 1);
+                        cariTSP cariTSP = new cariTSP();
+                        int[,] titikBaru = cariTSP.tambahTitik(simpul, xSaatIni, ySaatIni - 1);
                         queue.Enqueue(titikBaru);
                         Console.WriteLine("kiri " + xSaatIni + "," + (ySaatIni - 1));
                     }
@@ -233,8 +225,8 @@ namespace BFS
                             jumlahT--;
                             Console.WriteLine("Ketemu Treasure");
                         }
-                        cariBFS cariBFS = new cariBFS();
-                        int[,] titikBaru = cariBFS.tambahTitik(simpul, (xSaatIni - 1), ySaatIni);
+                        cariTSP cariTSP = new cariTSP();
+                        int[,] titikBaru = cariTSP.tambahTitik(simpul, (xSaatIni - 1), ySaatIni);
                         queue.Enqueue(titikBaru);
                         Console.WriteLine("kanan " + (xSaatIni - 1) + "," + ySaatIni);
                     }
@@ -250,8 +242,8 @@ namespace BFS
                             jumlahT--;
                             Console.WriteLine("Ketemu Treasure");
                         }
-                        cariBFS cariBFS = new cariBFS();
-                        int[,] titikBaru = cariBFS.tambahTitik(simpul, xSaatIni, (ySaatIni + 1));
+                        cariTSP cariTSP = new cariTSP();
+                        int[,] titikBaru = cariTSP.tambahTitik(simpul, xSaatIni, (ySaatIni + 1));
                         queue.Enqueue(titikBaru);
                         Console.WriteLine("kanan " + xSaatIni + "," + (ySaatIni + 1));
                     }
@@ -264,8 +256,8 @@ namespace BFS
                             jumlahT--;
                             Console.WriteLine("Ketemu Treasure");
                         }
-                        cariBFS cariBFS = new cariBFS();
-                        int[,] titikBaru = cariBFS.tambahTitik(simpul, (xSaatIni + 1), ySaatIni);
+                        cariTSP cariTSP = new cariTSP();
+                        int[,] titikBaru = cariTSP.tambahTitik(simpul, (xSaatIni + 1), ySaatIni);
                         queue.Enqueue(titikBaru);
                         Console.WriteLine("bawah " + (xSaatIni + 1) + "," + ySaatIni);
                     }
@@ -278,8 +270,8 @@ namespace BFS
                             jumlahT--;
                             Console.WriteLine("Ketemu Treasure");
                         }
-                        cariBFS cariBFS = new cariBFS();
-                        int[,] titikBaru = cariBFS.tambahTitik(simpul, xSaatIni, (ySaatIni - 1));
+                        cariTSP cariTSP = new cariTSP();
+                        int[,] titikBaru = cariTSP.tambahTitik(simpul, xSaatIni, (ySaatIni - 1));
                         queue.Enqueue(titikBaru);
                         Console.WriteLine("kiri " + xSaatIni + "," + (ySaatIni - 1));
                     }
@@ -296,10 +288,10 @@ namespace BFS
                             jumlahT--;
                             Console.WriteLine("Ketemu Treasure");
                         }
-                        cariBFS cariBFS = new cariBFS();
-                        int[,] titikBaru = cariBFS.tambahTitik(simpul, xSaatIni, (ySaatIni + 1));
+                        cariTSP cariTSP = new cariTSP();
+                        int[,] titikBaru = cariTSP.tambahTitik(simpul, xSaatIni, (ySaatIni + 1));
                         queue.Enqueue(titikBaru);
-                        Console.WriteLine("kanan " + xSaatIni + "," + (ySaatIni+1));
+                        Console.WriteLine("kanan " + xSaatIni + "," + (ySaatIni + 1));
                     }
                     if ((map[xSaatIni, ySaatIni - 1] == 'R' || map[xSaatIni, ySaatIni - 1] == 'T' || map[xSaatIni, ySaatIni - 1] == 'K') && ketemu == false)
                     {
@@ -309,8 +301,8 @@ namespace BFS
                             jumlahT--;
                             Console.WriteLine("Ketemu Treasure");
                         }
-                        cariBFS cariBFS = new cariBFS();
-                        int[,] titikBaru = cariBFS.tambahTitik(simpul, xSaatIni, (ySaatIni - 1));
+                        cariTSP cariTSP = new cariTSP();
+                        int[,] titikBaru = cariTSP.tambahTitik(simpul, xSaatIni, (ySaatIni - 1));
                         queue.Enqueue(titikBaru);
                         Console.WriteLine("kiri " + xSaatIni + "," + (ySaatIni - 1));
                     }
@@ -322,8 +314,8 @@ namespace BFS
                             jumlahT--;
                             Console.WriteLine("Ketemu Treasure");
                         }
-                        cariBFS cariBFS = new cariBFS();
-                        int[,] titikBaru = cariBFS.tambahTitik(simpul, (xSaatIni - 1), ySaatIni);
+                        cariTSP cariTSP = new cariTSP();
+                        int[,] titikBaru = cariTSP.tambahTitik(simpul, (xSaatIni - 1), ySaatIni);
                         queue.Enqueue(titikBaru);
                         Console.WriteLine("atas " + (xSaatIni - 1) + "," + ySaatIni);
                     }
@@ -340,10 +332,10 @@ namespace BFS
                             jumlahT--;
                             Console.WriteLine("Ketemu Treasure");
                         }
-                        cariBFS cariBFS = new cariBFS();
-                        int[,] titikBaru = cariBFS.tambahTitik(simpul, (xSaatIni +1), ySaatIni);
+                        cariTSP cariTSP = new cariTSP();
+                        int[,] titikBaru = cariTSP.tambahTitik(simpul, (xSaatIni + 1), ySaatIni);
                         queue.Enqueue(titikBaru);
-                        Console.WriteLine("kanan " + (xSaatIni+1) + "," + ySaatIni);
+                        Console.WriteLine("kanan " + (xSaatIni + 1) + "," + ySaatIni);
                     }
                     if ((map[xSaatIni, ySaatIni - 1] == 'R' || map[xSaatIni, ySaatIni - 1] == 'T' || map[xSaatIni, ySaatIni - 1] == 'K') && ketemu == false)
                     {
@@ -353,8 +345,8 @@ namespace BFS
                             jumlahT--;
                             Console.WriteLine("Ketemu Treasure");
                         }
-                        cariBFS cariBFS = new cariBFS();
-                        int[,] titikBaru = cariBFS.tambahTitik(simpul, xSaatIni, (ySaatIni - 1));
+                        cariTSP cariTSP = new cariTSP();
+                        int[,] titikBaru = cariTSP.tambahTitik(simpul, xSaatIni, (ySaatIni - 1));
                         queue.Enqueue(titikBaru);
                         Console.WriteLine("bawah " + xSaatIni + "," + (ySaatIni - 1));
                     }
@@ -366,8 +358,8 @@ namespace BFS
                             jumlahT--;
                             Console.WriteLine("Ketemu Treasure");
                         }
-                        cariBFS cariBFS = new cariBFS();
-                        int[,] titikBaru = cariBFS.tambahTitik(simpul, (xSaatIni - 1), ySaatIni);
+                        cariTSP cariTSP = new cariTSP();
+                        int[,] titikBaru = cariTSP.tambahTitik(simpul, (xSaatIni - 1), ySaatIni);
                         queue.Enqueue(titikBaru);
                         Console.WriteLine("atas " + (xSaatIni - 1) + "," + ySaatIni);
                     }
@@ -384,8 +376,8 @@ namespace BFS
                             jumlahT--;
                             Console.WriteLine("Ketemu Treasure");
                         }
-                        cariBFS cariBFS = new cariBFS();
-                        int[,] titikBaru = cariBFS.tambahTitik(simpul, xSaatIni, (ySaatIni + 1));
+                        cariTSP cariTSP = new cariTSP();
+                        int[,] titikBaru = cariTSP.tambahTitik(simpul, xSaatIni, (ySaatIni + 1));
                         queue.Enqueue(titikBaru);
                         Console.WriteLine("kanan " + xSaatIni + "," + (ySaatIni + 1));
                     }
@@ -398,8 +390,8 @@ namespace BFS
                             jumlahT--;
                             Console.WriteLine("Ketemu Treasure");
                         }
-                        cariBFS cariBFS = new cariBFS();
-                        int[,] titikBaru = cariBFS.tambahTitik(simpul, (xSaatIni + 1), ySaatIni);
+                        cariTSP cariTSP = new cariTSP();
+                        int[,] titikBaru = cariTSP.tambahTitik(simpul, (xSaatIni + 1), ySaatIni);
                         queue.Enqueue(titikBaru);
                         Console.WriteLine("bawah " + (xSaatIni + 1) + "," + ySaatIni);
                     }
@@ -412,8 +404,8 @@ namespace BFS
                             jumlahT--;
                             Console.WriteLine("Ketemu Treasure");
                         }
-                        cariBFS cariBFS = new cariBFS();
-                        int[,] titikBaru = cariBFS.tambahTitik(simpul, (xSaatIni - 1), ySaatIni);
+                        cariTSP cariTSP = new cariTSP();
+                        int[,] titikBaru = cariTSP.tambahTitik(simpul, (xSaatIni - 1), ySaatIni);
                         queue.Enqueue(titikBaru);
                         Console.WriteLine("atas " + (xSaatIni - 1) + "," + ySaatIni);
                     }
@@ -430,8 +422,8 @@ namespace BFS
                             jumlahT--;
                             Console.WriteLine("Ketemu Treasure");
                         }
-                        cariBFS cariBFS = new cariBFS();
-                        int[,] titikBaru = cariBFS.tambahTitik(simpul, xSaatIni, (ySaatIni + 1));
+                        cariTSP cariTSP = new cariTSP();
+                        int[,] titikBaru = cariTSP.tambahTitik(simpul, xSaatIni, (ySaatIni + 1));
                         queue.Enqueue(titikBaru);
                         Console.WriteLine("kanan " + xSaatIni + "," + (ySaatIni + 1));
                     }
@@ -444,8 +436,8 @@ namespace BFS
                             jumlahT--;
                             Console.WriteLine("Ketemu Treasure");
                         }
-                        cariBFS cariBFS = new cariBFS();
-                        int[,] titikBaru = cariBFS.tambahTitik(simpul, (xSaatIni + 1), ySaatIni);
+                        cariTSP cariTSP = new cariTSP();
+                        int[,] titikBaru = cariTSP.tambahTitik(simpul, (xSaatIni + 1), ySaatIni);
                         queue.Enqueue(titikBaru);
                         Console.WriteLine("bawah " + (xSaatIni + 1) + "," + ySaatIni);
                     }
@@ -458,8 +450,8 @@ namespace BFS
                             jumlahT--;
                             Console.WriteLine("Ketemu Treasure");
                         }
-                        cariBFS cariBFS = new cariBFS();
-                        int[,] titikBaru = cariBFS.tambahTitik(simpul, xSaatIni, (ySaatIni - 1));
+                        cariTSP cariTSP = new cariTSP();
+                        int[,] titikBaru = cariTSP.tambahTitik(simpul, xSaatIni, (ySaatIni - 1));
                         queue.Enqueue(titikBaru);
                         Console.WriteLine("kiri " + xSaatIni + "," + (ySaatIni - 1));
                     }
@@ -472,8 +464,8 @@ namespace BFS
                             jumlahT--;
                             Console.WriteLine("Ketemu Treasure");
                         }
-                        cariBFS cariBFS = new cariBFS();
-                        int[,] titikBaru = cariBFS.tambahTitik(simpul, (xSaatIni - 1), ySaatIni);
+                        cariTSP cariTSP = new cariTSP();
+                        int[,] titikBaru = cariTSP.tambahTitik(simpul, (xSaatIni - 1), ySaatIni);
                         queue.Enqueue(titikBaru);
                         Console.WriteLine("atas " + (xSaatIni - 1) + "," + ySaatIni);
                     }
@@ -483,7 +475,7 @@ namespace BFS
                 for (int i = 0; i < queue.Count; i++)
                 {
                     Console.Write("{");
-                    for(int j = 0; j < (queue.ElementAt(i).Length/2); j++)
+                    for (int j = 0; j < (queue.ElementAt(i).Length / 2); j++)
                     {
                         Console.Write("[" + queue.ElementAt(i)[j, 0] + "," + queue.ElementAt(i)[j, 1] + "], ");
                     }
@@ -491,50 +483,62 @@ namespace BFS
                 }
                 Console.WriteLine();
 
-                if (ketemu == true){
+                if (ketemu == true)
+                {
                     Console.WriteLine("---queue---");
                     int harusDequeue = queue.Count;
                     Console.WriteLine("jumlah queue = " + harusDequeue);
-                    for (int a = 0; a < harusDequeue - 1; a++){
+                    for (int a = 0; a < harusDequeue - 1; a++)
+                    {
                         int[,] buang = queue.Dequeue();
-                        for (int k = 0; k < buang.Length/2; k++){
+                        for (int k = 0; k < buang.Length / 2; k++)
+                        {
                             Console.Write("[" + buang[k, 0] + "," + buang[k, 1] + "], ");
                         }
                         Console.WriteLine();
                     }
                     Console.WriteLine("---dibuang---");
-                    map[queue.ElementAt(0)[0,0],queue.ElementAt(0)[0,1]] = 'R';
-                    
+                    map[queue.ElementAt(0)[0, 0], queue.ElementAt(0)[0, 1]] = 'R';
+
                     Console.Write("jalur saat ini = ");
-                    for(int k = 0; k < (queue.ElementAt(0).Length/2); k++){
+                    for (int k = 0; k < (queue.ElementAt(0).Length / 2); k++)
+                    {
                         Console.Write("[" + queue.ElementAt(0)[k, 0] + "," + queue.ElementAt(0)[k, 1] + "], ");
                     }
                     Console.WriteLine();
 
-                    if (jumlahT > 0){
+                    if (jumlahT > 0)
+                    {
                         ketemu = false;
                     }
-                    else{
+                    else if (jumlahT == 0)
+                    {
+                        ketemu = false;
+                        map[titikAwal[0], titikAwal[1]] = 'T';
+                    }
+                    else
+                    {
                         pencarian = false;
                     }
                 }
             }
             int[,] hasil = queue.Dequeue();
-            for (int i = 0; i < hasil.Length/2 / 2; i++)
+            for (int i = 0; i < hasil.Length / 2 / 2; i++)
             {
                 int temp = hasil[i, 0];
-                hasil[i, 0] = hasil[hasil.Length/2 - i - 1, 0];
-                hasil[hasil.Length/2 - i - 1, 0] = temp;
+                hasil[i, 0] = hasil[hasil.Length / 2 - i - 1, 0];
+                hasil[hasil.Length / 2 - i - 1, 0] = temp;
 
                 int temp1 = hasil[i, 1];
-                hasil[i, 1] = hasil[hasil.Length/2 - i - 1, 1];
-                hasil[hasil.Length/2 - i - 1, 1] = temp1;
+                hasil[i, 1] = hasil[hasil.Length / 2 - i - 1, 1];
+                hasil[hasil.Length / 2 - i - 1, 1] = temp1;
             }
             Console.WriteLine("Hasil BFS: ");
-            for (int i = 0; i < hasil.Length/2; i++)
+            for (int i = 0; i < hasil.Length / 2; i++)
             {
                 Console.Write("[" + hasil[i, 0] + "," + hasil[i, 1] + "], ");
             }
+
             return hasil;
         }
     }

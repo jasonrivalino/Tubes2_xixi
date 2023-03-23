@@ -36,7 +36,10 @@ public class Program
         int jumlahTreasure = aaa.jumlahTreasure(hasil, baris, kolom);
         Console.WriteLine(jumlahTreasure);
 
-        aaa.cariJalan(hasil, baris, kolom, lokasiPlayer);
+        int[,] jalan = aaa.cariJalan(hasil, baris, kolom, lokasiPlayer);
+
+        string hasilJalan = aaa.printStep(jalan);
+        Console.WriteLine("arah: "+ hasilJalan);
 
         Console.WriteLine("done!"); Console.ReadLine();
         Console.WriteLine();
