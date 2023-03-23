@@ -4,19 +4,27 @@ namespace BFS
 {
     public class cariBFS
     {
-        // public static void checkAdjacent(int x1, int y1, int x2, int y2)
-        // {
-        //     if (x1 == x2 + 1 && p1.y == p2.y)
-        //         Console.Write("U");
-        //     else if (p1.x == p2.x - 1 && p1.y == p2.y)
-        //         Console.Write("D");
-        //     else if (p1.x == p2.x && p1.y == p2.y + 1)
-        //         Console.Write("L");
-        //     else if (p1.x == p2.x && p1.y == p2.y - 1)
-        //         Console.Write("R");
-        //     else
-        //         Console.Write("Backtracking sampai di (" + p2.x + "," + p2.y + ")");
-        // }
+        public static string checkAdjacent(int x1, int y1, int x2, int y2)
+        {
+            if (x1 == x2 + 1 && y1 == y2)
+                return "U";
+            else if (x1 == y2 - 1 && y1 == y2)
+                return "D";
+            else if (x1 == y2 && y1 == y2 + 1)
+                return "L";
+            else if (x1 == y2 && y1 == y2 - 1)
+                return "R";
+        }
+
+        public static string printStep (int[,] array)
+        {
+            string step = "";
+            for (int i = 0; i < (array.Length / 2) - 1; i++)
+            {
+                step += checkAdjacent(array[i, 0], array[i, 1], array[i + 1, 0], array[i + 1, 1]);
+            }
+            return step;
+        }
 
         public int[] cariPlayer(char[,] map, int baris, int kolom)
         {
@@ -30,7 +38,7 @@ namespace BFS
                         lokasiPlayer[0] = k;
                         lokasiPlayer[1] = l;
                         //break;
-                        Console.WriteLine("FOUND");
+                        // Console.WriteLine("FOUND");
                     }
                 }
 
@@ -52,8 +60,8 @@ namespace BFS
 
         public int[,] tambahTitik(int[,] array, int x, int y)
         {
-            //Console.WriteLine("Bagian tambah titik");
-            //Console.WriteLine("x: " + x + " y: " + y);
+            Console.WriteLine("Bagian tambah titik");
+            Console.WriteLine("x: " + x + " y: " + y);
             int panjang = (array.Length / 2);
             int[,] arrayBaru = new int[panjang + 1, 2];
             arrayBaru[0, 0] = x; 
@@ -64,23 +72,23 @@ namespace BFS
                 arrayBaru[i + 1, 0] = array[i, 0];
                 arrayBaru[i + 1, 1] = array[i, 1];
             }
-            // Console.Write("Array baru: ");
-            // for(int i = 0; i<panjang + 1; i++)
-            // {
-            //     Console.Write("[" + arrayBaru[i, 0] + "," + arrayBaru[i, 1] + "], ");
-            // }
-            // Console.WriteLine();
-            // Console.WriteLine("-----------------");
+            Console.Write("Array baru: ");
+            for(int i = 0; i<panjang + 1; i++)
+            {
+                Console.Write("[" + arrayBaru[i, 0] + "," + arrayBaru[i, 1] + "], ");
+            }
+            Console.WriteLine();
+            Console.WriteLine("-----------------");
 
             return arrayBaru;
         }
 
-        public void cariJalan(char[,] map, int baris, int kolom, int[] player)
+        public int[,] cariJalan(char[,] map, int baris, int kolom, int[] player)
         {
             Queue<int[,]> queue = new Queue<int[,]>();
             cariBFS tiwal = new cariBFS();
             int[] titikAwal = tiwal.cariPlayer(map, baris, kolom);
-            Console.WriteLine("tiwal "+titikAwal[0] + "," + titikAwal[1]);
+            // Console.WriteLine("tiwal "+titikAwal[0] + "," + titikAwal[1]);
             int jumlahT = tiwal.jumlahTreasure(map, baris, kolom);
 
             queue.Enqueue(new int[,] { { titikAwal[0], titikAwal[1] } });
@@ -91,7 +99,7 @@ namespace BFS
             {
                 bool pojok = false;
                 int[,] simpul = queue.Dequeue();
-                Console.Write("Queue diambil: ");
+                // Console.Write("Queue diambil: ");
                 for (int c = 0; c < (simpul.Length / 2); c++)
                 {
                     Console.Write("[" + simpul[c, 0] + "," + simpul[c, 1] + "], ");
@@ -105,7 +113,7 @@ namespace BFS
                 {
                     Console.WriteLine("ada di pojok kiri atas");
                     pojok = true;
-                    if ((map[xSaatIni, ySaatIni + 1] == 'R' || map[xSaatIni, ySaatIni + 1] == 'T') && ketemu == false)
+                    if ((map[xSaatIni, ySaatIni + 1] == 'R' || map[xSaatIni, ySaatIni + 1] == 'T' || map[xSaatIni, ySaatIni + 1] == 'K') && ketemu == false)
                     {
                         if (map[xSaatIni, ySaatIni + 1] == 'T')
                         {
@@ -119,7 +127,7 @@ namespace BFS
                         Console.WriteLine("kanan " + xSaatIni + "," + (ySaatIni + 1));
                     }
 
-                    if ((map[xSaatIni + 1, ySaatIni] == 'R' || map[xSaatIni + 1, ySaatIni] == 'T') && ketemu == false)
+                    if ((map[xSaatIni + 1, ySaatIni] == 'R' || map[xSaatIni + 1, ySaatIni] == 'T' || map[xSaatIni + 1, ySaatIni] == 'K') && ketemu == false)
                     {
                         if (map[xSaatIni + 1, ySaatIni] == 'T')
                         {
@@ -137,7 +145,7 @@ namespace BFS
                 {
                     Console.WriteLine("ada di pojok kiri bawah");
                     pojok = true;
-                    if ((map[xSaatIni + 1, ySaatIni] == 'R' || map[xSaatIni + 1, ySaatIni] == 'T') && ketemu == false)
+                    if ((map[xSaatIni + 1, ySaatIni] == 'R' || map[xSaatIni + 1, ySaatIni] == 'T' || map[xSaatIni + 1, ySaatIni] == 'K') && ketemu == false)
                     {
                         if (map[xSaatIni + 1, ySaatIni] == 'T')
                         {
@@ -150,7 +158,7 @@ namespace BFS
                         queue.Enqueue(titikBaru);
                         Console.WriteLine("turun " + (xSaatIni + 1) + "," + ySaatIni);
                     }
-                    if ((map[xSaatIni, ySaatIni - 1] == 'R' || map[xSaatIni, ySaatIni - 1] == 'T') && ketemu == false)
+                    if ((map[xSaatIni, ySaatIni - 1] == 'R' || map[xSaatIni, ySaatIni - 1] == 'T' || map[xSaatIni, ySaatIni - 1] == 'K') && ketemu == false)
                     {
                         if (map[xSaatIni, ySaatIni - 1] == 'T')
                         {
@@ -170,7 +178,7 @@ namespace BFS
                 {
                     Console.WriteLine("ada di pojok kiri bawah");
                     pojok = true;
-                    if ((map[xSaatIni, ySaatIni + 1] == 'R' || map[xSaatIni, ySaatIni + 1] == 'T') && ketemu == false)
+                    if ((map[xSaatIni, ySaatIni + 1] == 'R' || map[xSaatIni, ySaatIni + 1] == 'T' || map[xSaatIni, ySaatIni + 1] == 'K') && ketemu == false)
                     {
                         if (map[xSaatIni, ySaatIni + 1] == 'T')
                         {
@@ -184,7 +192,7 @@ namespace BFS
                         Console.WriteLine("kanan " + xSaatIni + "," + (ySaatIni + 1));
                     }
 
-                    if ((map[xSaatIni - 1, ySaatIni] == 'R' || map[xSaatIni - 1, ySaatIni] == 'T') && ketemu == false)
+                    if ((map[xSaatIni - 1, ySaatIni] == 'R' || map[xSaatIni - 1, ySaatIni] == 'T' || map[xSaatIni - 1, ySaatIni] == 'K') && ketemu == false)
                     {
                         if (map[xSaatIni - 1, ySaatIni] == 'T')
                         {
@@ -203,7 +211,7 @@ namespace BFS
                 {
                     Console.WriteLine("ada di pojok kanan bawah");
                     pojok = true;
-                    if ((map[xSaatIni, ySaatIni - 1] == 'R' || map[xSaatIni, (ySaatIni - 1)] == 'T') && ketemu == false)
+                    if ((map[xSaatIni, ySaatIni - 1] == 'R' || map[xSaatIni, (ySaatIni - 1)] == 'T' || map[xSaatIni, ySaatIni - 1] == 'K') && ketemu == false)
                     {
                         if (map[xSaatIni, ySaatIni - 1] == 'T')
                         {
@@ -217,7 +225,7 @@ namespace BFS
                         Console.WriteLine("kiri " + xSaatIni + "," + (ySaatIni - 1));
                     }
 
-                    if ((map[xSaatIni - 1, ySaatIni] == 'R' || map[xSaatIni - 1, ySaatIni] == 'T') && ketemu == false)
+                    if ((map[xSaatIni - 1, ySaatIni] == 'R' || map[xSaatIni - 1, ySaatIni] == 'T' || map[xSaatIni - 1, ySaatIni] == 'K') && ketemu == false)
                     {
                         if (map[xSaatIni - 1, ySaatIni] == 'T')
                         {
@@ -234,7 +242,7 @@ namespace BFS
                 else if (xSaatIni == 0 && pojok == false) // ada di paling atas
                 {
                     Console.WriteLine("ada di paling kiri");
-                    if ((map[xSaatIni, ySaatIni + 1] == 'R' || map[xSaatIni, ySaatIni + 1] == 'T') && ketemu == false)
+                    if ((map[xSaatIni, ySaatIni + 1] == 'R' || map[xSaatIni, ySaatIni + 1] == 'T' || map[xSaatIni, ySaatIni + 1] == 'K') && ketemu == false)
                     {
                         if (map[xSaatIni, ySaatIni + 1] == 'T')
                         {
@@ -248,7 +256,7 @@ namespace BFS
                         Console.WriteLine("kanan " + xSaatIni + "," + (ySaatIni + 1));
                     }
 
-                    if ((map[xSaatIni + 1, ySaatIni] == 'R' || map[xSaatIni + 1, ySaatIni] == 'T') && ketemu == false)
+                    if ((map[xSaatIni + 1, ySaatIni] == 'R' || map[xSaatIni + 1, ySaatIni] == 'T' || map[xSaatIni + 1, ySaatIni] == 'K') && ketemu == false)
                     {
                         if (map[xSaatIni + 1, ySaatIni] == 'T')
                         {
@@ -262,7 +270,7 @@ namespace BFS
                         Console.WriteLine("bawah " + (xSaatIni + 1) + "," + ySaatIni);
                     }
 
-                    if ((map[xSaatIni, ySaatIni - 1] == 'R' || map[xSaatIni, ySaatIni - 1] == 'T') && ketemu == false)
+                    if ((map[xSaatIni, ySaatIni - 1] == 'R' || map[xSaatIni, ySaatIni - 1] == 'T' || map[xSaatIni, ySaatIni - 1] == 'K') && ketemu == false)
                     {
                         if (map[xSaatIni, ySaatIni - 1] == 'T')
                         {
@@ -280,7 +288,7 @@ namespace BFS
                 else if (xSaatIni == baris - 1 && pojok == false) // ada di paling bawah
                 {
                     Console.WriteLine("ada di paling kiri");
-                    if ((map[xSaatIni, ySaatIni + 1] == 'R' || map[xSaatIni, ySaatIni + 1] == 'T') && ketemu == false)
+                    if ((map[xSaatIni, ySaatIni + 1] == 'R' || map[xSaatIni, ySaatIni + 1] == 'T' || map[xSaatIni, ySaatIni + 1] == 'K') && ketemu == false)
                     {
                         if (map[xSaatIni, ySaatIni + 1] == 'T')
                         {
@@ -293,7 +301,7 @@ namespace BFS
                         queue.Enqueue(titikBaru);
                         Console.WriteLine("kanan " + xSaatIni + "," + (ySaatIni+1));
                     }
-                    if ((map[xSaatIni, ySaatIni - 1] == 'R' || map[xSaatIni, ySaatIni - 1] == 'T') && ketemu == false)
+                    if ((map[xSaatIni, ySaatIni - 1] == 'R' || map[xSaatIni, ySaatIni - 1] == 'T' || map[xSaatIni, ySaatIni - 1] == 'K') && ketemu == false)
                     {
                         if (map[xSaatIni, ySaatIni - 1] == 'T')
                         {
@@ -306,7 +314,7 @@ namespace BFS
                         queue.Enqueue(titikBaru);
                         Console.WriteLine("kiri " + xSaatIni + "," + (ySaatIni - 1));
                     }
-                    if ((map[xSaatIni - 1, ySaatIni] == 'R' || map[xSaatIni - 1, ySaatIni] == 'T') && ketemu == false)
+                    if ((map[xSaatIni - 1, ySaatIni] == 'R' || map[xSaatIni - 1, ySaatIni] == 'T' || map[xSaatIni - 1, ySaatIni] == 'K') && ketemu == false)
                     {
                         if (map[xSaatIni - 1, ySaatIni] == 'T')
                         {
@@ -324,7 +332,7 @@ namespace BFS
                 else if (ySaatIni == kolom - 1 && pojok == false) // ada di paling kanan
                 {
                     Console.WriteLine("ada di paling kanan");
-                    if ((map[xSaatIni + 1, ySaatIni] == 'R' || map[xSaatIni + 1, ySaatIni] == 'T') && ketemu == false)
+                    if ((map[xSaatIni + 1, ySaatIni] == 'R' || map[xSaatIni + 1, ySaatIni] == 'T' || map[xSaatIni + 1, ySaatIni] == 'K') && ketemu == false)
                     {
                         if (map[xSaatIni + 1, ySaatIni] == 'T')
                         {
@@ -337,7 +345,7 @@ namespace BFS
                         queue.Enqueue(titikBaru);
                         Console.WriteLine("kanan " + (xSaatIni+1) + "," + ySaatIni);
                     }
-                    if ((map[xSaatIni, ySaatIni - 1] == 'R' || map[xSaatIni, ySaatIni - 1] == 'T') && ketemu == false)
+                    if ((map[xSaatIni, ySaatIni - 1] == 'R' || map[xSaatIni, ySaatIni - 1] == 'T' || map[xSaatIni, ySaatIni - 1] == 'K') && ketemu == false)
                     {
                         if (map[xSaatIni, ySaatIni - 1] == 'T')
                         {
@@ -350,7 +358,7 @@ namespace BFS
                         queue.Enqueue(titikBaru);
                         Console.WriteLine("bawah " + xSaatIni + "," + (ySaatIni - 1));
                     }
-                    if ((map[xSaatIni - 1, ySaatIni] == 'R' || map[xSaatIni - 1, ySaatIni] == 'T') && ketemu == false)
+                    if ((map[xSaatIni - 1, ySaatIni] == 'R' || map[xSaatIni - 1, ySaatIni] == 'T' || map[xSaatIni - 1, ySaatIni] == 'K') && ketemu == false)
                     {
                         if (map[xSaatIni - 1, ySaatIni] == 'T')
                         {
@@ -368,7 +376,7 @@ namespace BFS
                 else if (ySaatIni == 0 && pojok == false) // ada di paling kiri
                 {
                     Console.WriteLine("ada di paling atas");
-                    if ((map[xSaatIni, ySaatIni + 1] == 'R' || map[xSaatIni, ySaatIni + 1] == 'T') && ketemu == false)
+                    if ((map[xSaatIni, ySaatIni + 1] == 'R' || map[xSaatIni, ySaatIni + 1] == 'T' || map[xSaatIni, ySaatIni + 1] == 'K') && ketemu == false)
                     {
                         if (map[xSaatIni, ySaatIni + 1] == 'T')
                         {
@@ -382,7 +390,7 @@ namespace BFS
                         Console.WriteLine("kanan " + xSaatIni + "," + (ySaatIni + 1));
                     }
 
-                    if ((map[xSaatIni + 1, ySaatIni] == 'R' || map[xSaatIni + 1, ySaatIni] == 'T') && ketemu == false)
+                    if ((map[xSaatIni + 1, ySaatIni] == 'R' || map[xSaatIni + 1, ySaatIni] == 'T' || map[xSaatIni + 1, ySaatIni] == 'K') && ketemu == false)
                     {
                         if (map[xSaatIni + 1, ySaatIni] == 'T')
                         {
@@ -396,7 +404,7 @@ namespace BFS
                         Console.WriteLine("bawah " + (xSaatIni + 1) + "," + ySaatIni);
                     }
 
-                    if ((map[xSaatIni - 1, ySaatIni] == 'R' || map[xSaatIni - 1, ySaatIni] == 'T') && ketemu == false)
+                    if ((map[xSaatIni - 1, ySaatIni] == 'R' || map[xSaatIni - 1, ySaatIni] == 'T' || map[xSaatIni - 1, ySaatIni] == 'K') && ketemu == false)
                     {
                         if (map[xSaatIni - 1, ySaatIni] == 'T')
                         {
@@ -413,7 +421,7 @@ namespace BFS
 
                 else // diluar kondisi di atas
                 {
-                    if ((map[xSaatIni, ySaatIni + 1] == 'R' || map[xSaatIni, ySaatIni + 1] == 'T') && ketemu == false)
+                    if ((map[xSaatIni, ySaatIni + 1] == 'R' || map[xSaatIni, ySaatIni + 1] == 'T' || map[xSaatIni, ySaatIni + 1] == 'K') && ketemu == false)
                     {
                         Console.WriteLine("ada di tengah");
                         if (map[xSaatIni, ySaatIni + 1] == 'T')
@@ -428,7 +436,7 @@ namespace BFS
                         Console.WriteLine("kanan " + xSaatIni + "," + (ySaatIni + 1));
                     }
 
-                    if ((map[xSaatIni + 1, ySaatIni] == 'R' || map[xSaatIni + 1, ySaatIni] == 'T') && ketemu == false)
+                    if ((map[xSaatIni + 1, ySaatIni] == 'R' || map[xSaatIni + 1, ySaatIni] == 'T' || map[xSaatIni + 1, ySaatIni] == 'K') && ketemu == false)
                     {
                         if (map[xSaatIni + 1, ySaatIni] == 'T')
                         {
@@ -442,7 +450,7 @@ namespace BFS
                         Console.WriteLine("bawah " + (xSaatIni + 1) + "," + ySaatIni);
                     }
 
-                    if ((map[xSaatIni, ySaatIni - 1] == 'R' || map[xSaatIni, ySaatIni - 1] == 'T') && ketemu == false)
+                    if ((map[xSaatIni, ySaatIni - 1] == 'R' || map[xSaatIni, ySaatIni - 1] == 'T' || map[xSaatIni, ySaatIni - 1] == 'K') && ketemu == false)
                     {
                         if (map[xSaatIni, ySaatIni - 1] == 'T')
                         {
@@ -456,7 +464,7 @@ namespace BFS
                         Console.WriteLine("kiri " + xSaatIni + "," + (ySaatIni - 1));
                     }
 
-                    if ((map[xSaatIni - 1, ySaatIni] == 'R' || map[xSaatIni - 1, ySaatIni] == 'T') && ketemu == false)
+                    if ((map[xSaatIni - 1, ySaatIni] == 'R' || map[xSaatIni - 1, ySaatIni] == 'T' || map[xSaatIni - 1, ySaatIni] == 'K') && ketemu == false)
                     {
                         if (map[xSaatIni - 1, ySaatIni] == 'T')
                         {
@@ -484,12 +492,6 @@ namespace BFS
                 Console.WriteLine();
 
                 if (ketemu == true){
-                    if (jumlahT > 0){
-                        ketemu = false;
-                    }
-                    else{
-                        pencarian = false;
-                    }
                     Console.WriteLine("---queue---");
                     int harusDequeue = queue.Count;
                     Console.WriteLine("jumlah queue = " + harusDequeue);
@@ -508,10 +510,16 @@ namespace BFS
                         Console.Write("[" + queue.ElementAt(0)[k, 0] + "," + queue.ElementAt(0)[k, 1] + "], ");
                     }
                     Console.WriteLine();
+
+                    if (jumlahT > 0){
+                        ketemu = false;
+                    }
+                    else{
+                        pencarian = false;
+                    }
                 }
             }
             int[,] hasil = queue.Dequeue();
-            //reverse array
             for (int i = 0; i < hasil.Length/2 / 2; i++)
             {
                 int temp = hasil[i, 0];
@@ -527,6 +535,7 @@ namespace BFS
             {
                 Console.Write("[" + hasil[i, 0] + "," + hasil[i, 1] + "], ");
             }
+            return hasil;
         }
     }
 }
