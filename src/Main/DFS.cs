@@ -50,7 +50,8 @@ namespace ConsoleApp3
             Console.WriteLine("Jalannya lewat mana sihhh");
             Algorithm.printStack(visited);
             int count = visited.Count;
-            Algorithm.printStep(visited, count);
+            string direction = Algorithm.printStep(visited, count);
+            Console.WriteLine(direction);
             Console.WriteLine();
             Console.WriteLine("Jumlah node yang dilewati: " + Algorithm.countNode(visited));
             Console.ReadLine();
@@ -87,7 +88,7 @@ namespace ConsoleApp3
             return (x + y).GetHashCode();
         }
     }
-
+    
     public class Algorithm
     {
         public static Stack<Point> stackTreasure(char[,] arr)
@@ -105,18 +106,17 @@ namespace ConsoleApp3
             }
             return treasure;
         }
-        public static void printStep(Stack<Point> s, int count)
+        public static string printStep(Stack<Point> s, int count)
         {
+            string direction;
             if (s.Count == 1)
-                return;
+                return "";
             Point temp = s.Peek();
             s.Pop();
             Point temp1 = s.Peek();
-            printStep(s, count);
-            checkAdjacent(temp1, temp);
-            if (s.Count != count - 1)
-                Console.Write(" - ");
+            direction = printStep(s, count) + "" + checkAdjacent(temp1, temp);
             s.Push(temp);
+            return direction;
         }
         public static void printStack(Stack<Point> s)
         {
@@ -254,18 +254,25 @@ namespace ConsoleApp3
             Point temp = unvisited.Pop();
             visited.Push(temp);
         }
-        public static void checkAdjacent(Point p1, Point p2)
+        public static string checkAdjacent(Point p1, Point p2)
         {
+            string direction;
             if (p1.x == p2.x + 1 && p1.y == p2.y)
-                Console.Write("U");
+                //Console.Write("U");
+                direction = "U";
             else if (p1.x == p2.x - 1 && p1.y == p2.y)
-                Console.Write("D");
+                //Console.Write("D");
+                direction = "D";
             else if (p1.x == p2.x && p1.y == p2.y + 1)
-                Console.Write("L");
+                //Console.Write("L");
+                direction = "L";
             else if (p1.x == p2.x && p1.y == p2.y - 1)
-                Console.Write("R");
+                //Console.Write("R");
+                direction = "R";
             else
-                Console.Write("Backtracking sampai di (" + p2.x + "," + p2.y + ")");
+                //Console.Write("Backtracking sampai di (" + p2.x + "," + p2.y + ")");
+                direction = "Backtracking sampai di (" + p2.x + "," + p2.y + ")";
+            return direction;
         }
         public static bool checkAdjacentBool(Point p1, Point p2)
         {
