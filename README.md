@@ -47,7 +47,7 @@ Repository ini berisi aplikasi dengan GUI sederhana untuk mengimplementasikan al
 - R: grid yang mungkin diakses (sebuah lintasan) -> dilambangkan dengan warna emas pada peta
 - X: grid halangan yang tidak dapat diakses -> dilambangkan dengan warna hitam pada peta
 
-2. Keterangan Prioritas Pembangkit Arah Simpul: (Left Right Up Down / LRUD)
+2. Keterangan Prioritas Pembangkit Arah Simpul: (Right Down Left Up / RDLU)
 
 ## Struktur File
 ```bash
