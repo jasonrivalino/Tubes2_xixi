@@ -68,12 +68,16 @@ Repository ini berisi aplikasi dengan GUI sederhana untuk mengimplementasikan al
 ## Requirements
 1. Visual Studio 2022
 2. .NET 7.0
+3. Windows Operating System
 
 ## Cara Menjalankan Program
 Langkah-langkah proses setup program adalah sebagai berikut:
+1. Clone repository ini
+2. Buka file `MazeSolver.sln` dari repository ini
+3. Jalankan program dengan mengklik tombol Run atau tekan F5 pada keyboard di Visual Studio 2022
 
 ## Tampilan Interface Program
-![Screenshot 2023-03-21 234147](https://user-images.githubusercontent.com/91790457/226720319-50a98c35-fc37-4753-b02c-fd53cf5b456c.png)
+![Screenshot 2023-03-23 202613](https://user-images.githubusercontent.com/91790457/227218508-77ced53f-31d0-4074-9bab-b9fb357356c8.png)
 
 ## Acknowledgements
 - Tuhan Yang Maha Esa
