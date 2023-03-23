@@ -311,12 +311,12 @@ namespace GUI_Demo
 
                     while (treasure.Count != 0)
                     {
-                        Console.WriteLine("Visited sekarang: " + visited.Peek().x + "," + visited.Peek().y);
+                        //Console.WriteLine("Visited sekarang: " + visited.Peek().x + "," + visited.Peek().y);
                         int xKunjung = (int)visited.Peek().x;
                         int yKunjung = (int)visited.Peek().y;
                         dataGridView1.Rows[xKunjung].Cells[yKunjung].Style.BackColor = Color.Orange;
                         Algorithm.treasureArrived(treasure, visited.Peek());
-                        countBacktracking = Algorithm.adjacentPoints(arr, visited, unvisited, backtracking, countBacktracking, countNode);
+                        countBacktracking = Algorithm.adjacentPoints(arr, visited, unvisited, backtracking, countBacktracking, countNode, treasure);
                         if (treasure.Count != 0)
                         {
                             Algorithm.move(visited, unvisited);
@@ -335,20 +335,28 @@ namespace GUI_Demo
                                 {
                                     dataGridView1[col2, row2].Style.BackColor = Color.Red;
                                 }
-                                if (element2 == 'T')
-                                {
-                                    dataGridView1[col2, row2].Style.BackColor = Color.LimeGreen;
-                                }
                             }
                         }
                     }
 
-                    //Console.WriteLine("Jalannya lewat mana sihhh");
-                    //Algorithm.printStack(visited);
+                    Console.WriteLine("Jalannya lewat mana aja...");
+                    Algorithm.printStack(visited);
+                    Stack<Points> visitedCopy = visited;
+                    Points[] arrayStack = visitedCopy.ToArray();
+                    //Algorithm.printArray(arrayStack);
+
+                    for (int i = 0; i < arrayStack.GetLength(0); i++)
+                    {
+                        for (int j = i + 1; j < arrayStack.GetLength(0); j++)
+                        {
+                            if (arrayStack[i].x == arrayStack[j].x && arrayStack[i].y == arrayStack[j].y)
+                            {
+                                dataGridView1.Rows[arrayStack[i].x].Cells[arrayStack[i].y].Style.BackColor = Color.Brown;
+                            }
+                        }
+                    }
                     int count = visited.Count;
                     string direction = Algorithm.printStep(visited, count);
-                    //Console.WriteLine(direction);
-                    //Console.WriteLine("Jumlah node yang dilewati: " + Algorithm.countNode(visited));
                     textBox3.Text = (count-1).ToString();
                     textBox4.Text = count.ToString();
                     textBox5.Text = direction;

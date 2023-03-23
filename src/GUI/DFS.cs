@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 
 namespace dfsSearching
 {
@@ -14,14 +15,12 @@ namespace dfsSearching
             //char[,] arr = { { 'K', 'R', 'R', 'X', 'X', 'X' }, { 'X', 'X', 'R', 'R', 'R', 'T' }, { 'T', 'R', 'R', 'X', 'X', 'R' }, { 'R', 'X', 'R', 'R', 'R', 'R' } };
             //char[,] arr = { { 'K', 'X', 'X', 'X', 'X', 'X' }, { 'R', 'R', 'X', 'X', 'X', 'X' }, { 'R', 'R', 'R', 'X', 'X', 'X' }, { 'R', 'R', 'R', 'R', 'X', 'X' }, { 'R', 'R', 'R', 'R', 'R', 'X' }, { 'R', 'R', 'R', 'R', 'R', 'T' } };
             //char[,] arr = { { 'X', 'X', 'X', 'X', 'X', 'X' }, { 'X', 'T', 'K', 'R', 'T', 'X' }, { 'X', 'X', 'X', 'X', 'X', 'X' } };
+            //char[,] arr = TXT.toMatrix("TextFile1.txt");
             Algorithm.printMatrix(arr);
             Stack<Points> treasure = new Stack<Points>();
             treasure = Algorithm.stackTreasure(arr);
             Algorithm.printStack(treasure);
-            //Points p = new Points(1, 3);
-            //treasureArrived(treasure, p);
-            //printStack(treasure);
-            Points K = Algorithm.findK(arr);
+            Points K =  Algorithm.findK(arr);
             Stack<Points> visited = new Stack<Points>();
             visited.Push(K);
             Algorithm.printStack(visited);
@@ -35,7 +34,7 @@ namespace dfsSearching
                 Algorithm.treasureArrived(treasure, visited.Peek());
                 Console.WriteLine("Treasure skrg bgt");
                 Algorithm.printStack(treasure);
-                countBacktracking = Algorithm.adjacentPoints(arr, visited, unvisited, backtracking, countBacktracking, countNode);
+                countBacktracking = Algorithm.adjacentPoints(arr, visited, unvisited, backtracking, countBacktracking, countNode, treasure);
                 if (treasure.Count != 0)
                 {
                     Algorithm.move(visited, unvisited);
@@ -43,6 +42,9 @@ namespace dfsSearching
             }
             Console.WriteLine("Jalannya lewat mana sihhh");
             Algorithm.printStack(visited);
+            Stack<Points> visitedCopy = visited;
+            Points[] array = visitedCopy.ToArray();
+            Algorithm.printArray(array);
             int count = visited.Count;
             string direction = Algorithm.printStep(visited, count);
             Console.WriteLine(direction);
@@ -122,6 +124,13 @@ namespace dfsSearching
             Console.WriteLine(temp.x + "," + temp.y);
             s.Push(temp);
         }
+        public static void printArray(Points[] a)
+        {
+            for (int i = 0; i < a.Length; i++)
+            {
+                Console.WriteLine("(" + a[i].x + "," + a[i].y + ")");
+            }
+        }
         public static void treasureArrived(Stack<Points> s, Points p)
         {
             if (s.Count == 0)
@@ -160,11 +169,8 @@ namespace dfsSearching
             }
             return p;
         }
-        public static int adjacentPoints(char[,] arr, Stack<Points> visited, Stack<Points> unvisited, Stack<Points> backtracking, int countBacktracking, Stack<int> countNode)
+        public static int adjacentPoints(char[,] arr, Stack<Points> visited, Stack<Points> unvisited, Stack<Points> backtracking, int countBacktracking, Stack<int> countNode, Stack<Points> treasure)
         {
-            //Console.WriteLine("count" + countBacktracking);
-            Stack<Points> treasure = new Stack<Points>();
-            treasure = Algorithm.stackTreasure(arr);
             int count = 0;
             Points p = visited.Peek();
             if ((p.x != 0) && (arr[p.x - 1, p.y] != 'X') && (!visited.Contains(new Points(p.x - 1, p.y))))
@@ -195,7 +201,6 @@ namespace dfsSearching
             {
                 countBacktracking++;
                 backtracking.Push(p);
-                //Console.WriteLine("Masuk sini");
             }
             if (count > 1)
             {
@@ -203,42 +208,45 @@ namespace dfsSearching
                 {
                     countNode.Push(countBacktracking);
                 }
-                //Console.WriteLine("Simpangan");
+                Console.WriteLine("Simpangan");
                 countBacktracking = 1;
                 backtracking.Push(p);
 
             }
             Algorithm.treasureArrived(treasure, visited.Peek());
-            if (count == 0 && treasure.Count != 0)
+            if (treasure.Count != 0)
             {
-                if (countBacktracking != 0)
+                if (count == 0)
                 {
-                    countNode.Push(countBacktracking);
-                    int tempCount = countNode.Pop();
-                    while (tempCount != 0)
+                    if (countBacktracking != 0)
                     {
-                        Points temp = backtracking.Pop();
-                        visited.Push(temp);
-                        tempCount--;
-                    }
-                    if (backtracking.Count != 0)
-                    {
-                        Points temp = visited.Peek();
-                        Points temp1 = backtracking.Peek();
-                        if (checkAdjacentBool(temp, temp1))
+                        countNode.Push(countBacktracking);
+                        int tempCount = countNode.Pop();
+                        while (tempCount != 0)
                         {
-                            int tempCount1 = countNode.Pop();
-                            while (tempCount1 != 0)
+                            Points temp = backtracking.Pop();
+                            visited.Push(temp);
+                            tempCount--;
+                        }
+                        if (backtracking.Count != 0)
+                        {
+                            Points temp = visited.Peek();
+                            Points temp1 = backtracking.Peek();
+                            if (checkAdjacentBool(temp, temp1))
                             {
-                                Points temp2 = backtracking.Pop();
-                                visited.Push(temp2);
-                                tempCount1--;
+                                int tempCount1 = countNode.Pop();
+                                while (tempCount1 != 0)
+                                {
+                                    Points temp2 = backtracking.Pop();
+                                    visited.Push(temp2);
+                                    tempCount1--;
+                                }
                             }
                         }
                     }
+                    Console.WriteLine("Backtraking nih");
+                    countBacktracking = 0;
                 }
-                //Console.WriteLine("Backtraking nih");
-                countBacktracking = 0;
             }
             return countBacktracking;
         }
@@ -252,19 +260,14 @@ namespace dfsSearching
         {
             string direction;
             if (p1.x == p2.x + 1 && p1.y == p2.y)
-                //Console.Write("U");
                 direction = "U";
             else if (p1.x == p2.x - 1 && p1.y == p2.y)
-                //Console.Write("D");
                 direction = "D";
             else if (p1.x == p2.x && p1.y == p2.y + 1)
-                //Console.Write("L");
                 direction = "L";
             else if (p1.x == p2.x && p1.y == p2.y - 1)
-                //Console.Write("R");
                 direction = "R";
             else
-                //Console.Write("Backtracking sampai di (" + p2.x + "," + p2.y + ")");
                 direction = "Backtracking sampai di (" + p2.x + "," + p2.y + ")";
             return direction;
         }
