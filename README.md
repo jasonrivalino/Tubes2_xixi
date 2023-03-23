@@ -77,7 +77,7 @@ Langkah-langkah proses setup program adalah sebagai berikut:
 3. Jalankan program dengan mengklik tombol Run atau tekan F5 pada keyboard di Visual Studio 2022
 
 ## Tampilan Interface Program
-![Screenshot 2023-03-23 202613](https://user-images.githubusercontent.com/91790457/227218508-77ced53f-31d0-4074-9bab-b9fb357356c8.png)
+![Screenshot 2023-03-23 221723](https://user-images.githubusercontent.com/91790457/227250484-22e35d54-1feb-49c8-b4dc-15decb1d890f.png)
 
 ## Acknowledgements
 - Tuhan Yang Maha Esa
