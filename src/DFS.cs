@@ -10,46 +10,43 @@ namespace dfsSearching
         {
             //char[,] arr = {{'K','R','R','R'}, {'X','R','X','X'}, {'X','T','X','X'}, {'X','R','R','T'}};
             //char[,] arr = { { 'K', 'R', 'R', 'R' }, { 'X', 'R', 'X', 'R' }, { 'X', 'R', 'X', 'R' }, { 'X', 'R', 'R', 'T' } };
-            char[,] arr = { { 'T', 'R', 'R', 'T', 'R', 'R', 'X' }, { 'X', 'R', 'X', 'R', 'X', 'X', 'X' }, { 'X', 'R', 'R', 'T', 'R', 'R', 'X' }, { 'X', 'R', 'X', 'X', 'X', 'X', 'X' }, { 'X', 'R', 'X', 'X', 'R', 'X', 'X' }, { 'X', 'R', 'X', 'X', 'R', 'X', 'X' }, { 'K', 'R', 'R', 'R', 'R', 'R', 'R' } };
+            //char[,] arr = { { 'T', 'R', 'R', 'T', 'R', 'R', 'X' }, { 'X', 'R', 'X', 'R', 'X', 'X', 'X' }, { 'X', 'R', 'R', 'T', 'R', 'R', 'X' }, { 'X', 'R', 'X', 'X', 'X', 'X', 'X' }, { 'X', 'R', 'X', 'X', 'R', 'X', 'X' }, { 'X', 'R', 'X', 'X', 'R', 'X', 'X' }, { 'K', 'R', 'R', 'R', 'R', 'R', 'R' } };
             //char[,] arr = { { 'K', 'R', 'R', 'R', 'R', 'R', 'X' }, { 'X', 'R', 'X', 'T', 'X', 'R', 'R' }, { 'X', 'T', 'X', 'R', 'X', 'R', 'X' }, { 'X', 'R', 'X', 'X', 'X', 'T', 'X' } };
             //char[,] arr = { { 'K', 'R', 'R', 'X', 'X', 'X' }, { 'X', 'X', 'R', 'R', 'R', 'T' }, { 'T', 'R', 'R', 'X', 'X', 'R' }, { 'R', 'X', 'R', 'R', 'R', 'R' } };
             //char[,] arr = { { 'K', 'X', 'X', 'X', 'X', 'X' }, { 'R', 'R', 'X', 'X', 'X', 'X' }, { 'R', 'R', 'R', 'X', 'X', 'X' }, { 'R', 'R', 'R', 'R', 'X', 'X' }, { 'R', 'R', 'R', 'R', 'R', 'X' }, { 'R', 'R', 'R', 'R', 'R', 'T' } };
             //char[,] arr = { { 'X', 'X', 'X', 'X', 'X', 'X' }, { 'X', 'T', 'K', 'R', 'T', 'X' }, { 'X', 'X', 'X', 'X', 'X', 'X' } };
-            //char[,] arr = TXT.toMatrix("TextFile1.txt");
-            Algorithm.printMatrix(arr);
+            //char[,] arr = TXT.toMatrix("TextFile4.txt");
+            //Algorithm.printMatrix(arr);
             Stack<Points> treasure = new Stack<Points>();
-            treasure = Algorithm.stackTreasure(arr);
+            //treasure = Algorithm.stackTreasure(arr);
             Algorithm.printStack(treasure);
-            Points K =  Algorithm.findK(arr);
+            //Points K = Algorithm.findK(arr);
             Stack<Points> visited = new Stack<Points>();
-            visited.Push(K);
+            Stack<Points> path = new Stack<Points>();
+            //visited.Push(K);
+            //path.Push(K);
             Algorithm.printStack(visited);
             Stack<Points> unvisited = new Stack<Points>();
-            Stack<Points> backtracking = new Stack<Points>();
-            Stack<int> countNode = new Stack<int>();
-            int countBacktracking = 0;
             while (treasure.Count != 0)
             {
                 Console.WriteLine("Visited sekarang: " + visited.Peek().x + "," + visited.Peek().y);
                 Algorithm.treasureArrived(treasure, visited.Peek());
-                Console.WriteLine("Treasure skrg bgt");
-                Algorithm.printStack(treasure);
-                countBacktracking = Algorithm.adjacentPoints(arr, visited, unvisited, backtracking, countBacktracking, countNode, treasure);
+                //Algorithm.adjacentPoints(arr, visited, unvisited);
                 if (treasure.Count != 0)
                 {
-                    Algorithm.move(visited, unvisited);
+                    Algorithm.move(visited, unvisited, path);
                 }
             }
             Console.WriteLine("Jalannya lewat mana sihhh");
-            Algorithm.printStack(visited);
-            Stack<Points> visitedCopy = visited;
-            Points[] array = visitedCopy.ToArray();
+            Algorithm.printStack(path);
+            Stack<Points> pathCopy = path;
+            Points[] array = pathCopy.ToArray();
             Algorithm.printArray(array);
-            int count = visited.Count;
-            string direction = Algorithm.printStep(visited, count);
+            int count = path.Count;
+            string direction = Algorithm.printStep(path, count);
             Console.WriteLine(direction);
             Console.WriteLine();
-            Console.WriteLine("Jumlah node yang dilewati: " + Algorithm.countNode(visited));
+            Console.WriteLine("Jumlah node yang dilewati: " + Algorithm.countNode(path));
             Console.ReadLine();
         }
     }
@@ -169,7 +166,7 @@ namespace dfsSearching
             }
             return p;
         }
-        public static int adjacentPoints(char[,] arr, Stack<Points> visited, Stack<Points> unvisited, Stack<Points> backtracking, int countBacktracking, Stack<int> countNode, Stack<Points> treasure)
+        public static void adjacentPoints(char[,] arr, Stack<Points> visited, Stack<Points> unvisited)
         {
             int count = 0;
             Points p = visited.Peek();
@@ -197,64 +194,33 @@ namespace dfsSearching
                 unvisited.Push(p1);
                 count++;
             }
-            if (backtracking.Count != 0 && count != 0)
+            if (count == 0)
             {
-                countBacktracking++;
-                backtracking.Push(p);
+                Console.WriteLine("BackTracking");
             }
-            if (count > 1)
-            {
-                if (countBacktracking != 0)
-                {
-                    countNode.Push(countBacktracking);
-                }
-                Console.WriteLine("Simpangan");
-                countBacktracking = 1;
-                backtracking.Push(p);
-
-            }
-            Algorithm.treasureArrived(treasure, visited.Peek());
-            if (treasure.Count != 0)
-            {
-                if (count == 0)
-                {
-                    if (countBacktracking != 0)
-                    {
-                        countNode.Push(countBacktracking);
-                        int tempCount = countNode.Pop();
-                        while (tempCount != 0)
-                        {
-                            Points temp = backtracking.Pop();
-                            visited.Push(temp);
-                            tempCount--;
-                        }
-                        if (backtracking.Count != 0)
-                        {
-                            Points temp = visited.Peek();
-                            Points temp1 = backtracking.Peek();
-                            if (checkAdjacentBool(temp, temp1))
-                            {
-                                int tempCount1 = countNode.Pop();
-                                while (tempCount1 != 0)
-                                {
-                                    Points temp2 = backtracking.Pop();
-                                    visited.Push(temp2);
-                                    tempCount1--;
-                                }
-                            }
-                        }
-                    }
-                    Console.WriteLine("Backtraking nih");
-                    countBacktracking = 0;
-                }
-            }
-            return countBacktracking;
         }
-
-        public static void move(Stack<Points> visited, Stack<Points> unvisited)
+        public static void move(Stack<Points> visited, Stack<Points> unvisited, Stack<Points> path)
         {
             Points temp = unvisited.Pop();
+            Stack<Points> visitedCopy = new Stack<Points> (visited);
+            Reverse(visitedCopy);
+            if (!checkAdjacentBool(temp, visited.Peek()))
+            {
+                Console.WriteLine("masuk sini");
+                Points temp1 = visitedCopy.Pop();
+                Points temp2 = visitedCopy.Pop();
+                Points temp4 = visited.Pop();
+                path.Push(temp2);
+                Console.WriteLine("Temp: " + temp.x + "," + temp.y);
+                while (!checkAdjacentBool(temp, temp2))
+                {
+                    temp2 = visitedCopy.Pop();
+                    temp4 = visited.Pop();
+                    path.Push(temp2);
+                }
+            }
             visited.Push(temp);
+            path.Push(temp);
         }
         public static string checkAdjacent(Points p1, Points p2)
         {
@@ -295,6 +261,24 @@ namespace dfsSearching
                 s.Push(temp);
             return s.Count;
         }
+        static void Reverse(Stack<Points> s)
+        {
+            if (s.Count == 0)
+                return;
+            Points element = s.Pop();
+            Reverse(s);
+            InsertAndRearrange(s, element);
+        }
+        static void InsertAndRearrange(Stack<Points> s, Points element)
+        {
+            if (s.Count == 0)
+                s.Push(element);
+            else
+            {
+                Points temp = s.Pop();
+                InsertAndRearrange(s, element);
+                s.Push(temp);
+            }
+        }
     }
 }
-
