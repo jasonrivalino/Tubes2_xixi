@@ -59,7 +59,7 @@ Repository ini berisi aplikasi dengan GUI sederhana untuk mengimplementasikan al
 📦Tubes2_xixi
  ┣ 📂bin
  ┣ 📂doc
- ┃ ┗ 📜xixi_018.pdf
+ ┃ ┗ 📜Tubes2_K03_13521008,13521018,13521027_Xixi.pdf
  ┣ 📂src
  ┃ ┣ 📂.vs
  ┃ ┣ 📂properties
