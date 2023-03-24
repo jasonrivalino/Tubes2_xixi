@@ -1,20 +1,14 @@
 ﻿using bacaFile;
 using dfsSearching;
+using BFS;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Data.Common;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Security.Policy;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ProgressBar;
 
 namespace GUI_Demo
 {
@@ -24,6 +18,7 @@ namespace GUI_Demo
         TXT test = new TXT();
         private string fileName;
         Programs dfs = new Programs();
+        cariBFS bfs = new cariBFS();
         Stopwatch stopwatch = new Stopwatch();
 
         public Form1()
@@ -65,25 +60,25 @@ namespace GUI_Demo
         }
 
         // Fungsi untuk memasukkan input huruf ke dataGridView
-        public static DataTable GetDataTableFrom2DArray(char[,] array)
+        public static DataTable ConvertArrayToTable(char[,] array)
         {
-            DataTable dt = new DataTable();
+            DataTable data = new DataTable();
 
             for (int i = 0; i < array.GetLength(1); i++)
             {
-                dt.Columns.Add();
+                data.Columns.Add();
             }
 
             for (int i = 0; i < array.GetLength(0) - 1; i++)
             {
-                DataRow row = dt.NewRow();
+                DataRow row = data.NewRow();
                 for (int j = 0; j < array.GetLength(1); j++)
                 {
-                    row[j] = array[i, j];
+                    row[j] = array[i,j];
                 }
-                dt.Rows.Add();
+                data.Rows.Add();
             }
-            return dt;
+            return data;
         }
 
         // Buat visualisasi awal
@@ -119,16 +114,11 @@ namespace GUI_Demo
 
                 if (checkElement)
                 {
-                    dataGridView1.DataSource = GetDataTableFrom2DArray(hasil);
+                    dataGridView1.DataSource = ConvertArrayToTable(hasil);
                     dataGridView1.BackgroundColor = Color.Gold;
                     dataGridView1.DefaultCellStyle.BackColor = Color.Gold;
                     dataGridView1.GridColor = Color.Black;
                     dataGridView1.ScrollBars = ScrollBars.None;
-
-                    dataGridView1.AllowUserToResizeRows = false;
-                    dataGridView1.AllowUserToResizeColumns = false;
-                    dataGridView1.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-                    dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
                     foreach (DataGridViewColumn cols in dataGridView1.Columns)
                         cols.Width = dataGridView1.Width / dataGridView1.Columns.Count;
@@ -173,7 +163,9 @@ namespace GUI_Demo
         {
             if (radioButton1.Checked) // Jalanin radioButton1 (BFS)
             {
-                
+                stopwatch.Start();
+                visualizeBFS();
+                stopwatch.Stop();
             }
 
             if(radioButton2.Checked) // Jalanin radioButton2 (DFS)
@@ -184,6 +176,87 @@ namespace GUI_Demo
             }
             long runningTime = stopwatch.ElapsedMilliseconds;
             textBox2.Text = runningTime.ToString();
+        }
+
+        // Fungsi untuk visualisasi pencarian dengan BFS
+        public void visualizeBFS()
+        {
+            char[,] arr = test.toMatrix(fileName);
+            int baris = arr.GetLength(0);
+            int kolom = arr.GetLength(1);
+            int[] lokasiPlayer = new int[2];
+            //int countChecking = 0;
+
+            dataGridView1.DataSource = ConvertArrayToTable(arr);
+            dataGridView1.BackgroundColor = Color.Gold;
+            dataGridView1.DefaultCellStyle.BackColor = Color.Gold;
+            dataGridView1.GridColor = Color.Black;
+            dataGridView1.ScrollBars = ScrollBars.None;
+
+            foreach (DataGridViewColumn cols in dataGridView1.Columns)
+                cols.Width = dataGridView1.Width / dataGridView1.Columns.Count;
+
+            foreach (DataGridViewRow rows in dataGridView1.Rows)
+                rows.Height = dataGridView1.Height / dataGridView1.Rows.Count;
+
+            lokasiPlayer = bfs.cariPlayer(arr, baris, kolom);
+            int[,] hasilnyaBFS = bfs.cariJalan(arr, baris, kolom, lokasiPlayer);
+            Console.WriteLine(hasilnyaBFS);
+
+            //for (int countRow = 0; countRow < arr.GetLength(0); countRow++)
+            //{
+            //    for (int countCol = 0; countCol < arr.GetLength(1); countCol++)
+            //    {
+            //        if (arr[countRow, countCol] != 'X')
+            //        {
+            //            countChecking++;
+            //        }
+            //    }
+            //}
+
+            for (int i = 0; i < hasilnyaBFS.GetLength(0); i++)
+            {
+                for (int j = 0; j < hasilnyaBFS.GetLength(1); j++)
+                {
+                    int xKunjung = hasilnyaBFS[i, 0];
+                    int yKunjung = hasilnyaBFS[i, 1];
+                    dataGridView1.Rows[xKunjung].Cells[yKunjung].Style.BackColor = Color.Orange;
+                }
+            }
+
+            for (int i = 0; i < hasilnyaBFS.GetLength(0); i++)
+            {
+                for (int j = i + 1; j < hasilnyaBFS.GetLength(0); j++)
+                {
+                    if (hasilnyaBFS[i, 0] == hasilnyaBFS[j, 0] && hasilnyaBFS[i, 1] == hasilnyaBFS[j, 1])
+                    {
+                        dataGridView1.Rows[hasilnyaBFS[i, 0]].Cells[hasilnyaBFS[i, 1]].Style.BackColor = Color.Brown;
+                    }
+                }
+            }
+
+            for (int row2 = 0; row2 < arr.GetLength(0); row2++)
+            {
+                for (int col2 = 0; col2 < arr.GetLength(1); col2++)
+                {
+                    char element2 = arr[row2, col2];
+                    if (element2 == 'X')
+                    {
+                        dataGridView1[col2, row2].Style.BackColor = Color.Black;
+                    }
+                    if (element2 == 'K')
+                    {
+                        dataGridView1[col2, row2].Style.BackColor = Color.Red;
+                    }
+                    if (element2 == 'T')
+                    {
+                        dataGridView1[col2, row2].Style.BackColor = Color.LimeGreen;
+                    }
+                }
+            }
+            textBox3.Text = (hasilnyaBFS.GetLength(0)-1).ToString();
+            //textBox4.Text = countChecking.ToString();
+            //textBox5.Text = direction;
         }
 
         // Fungsi untuk visualisasi pencarian dengan DFS
@@ -197,32 +270,34 @@ namespace GUI_Demo
             }
             else
             {
-                char[,] hasil = test.toMatrix(fileName);
+                char[,] arr = test.toMatrix(fileName);
                 char[] valid = new char[] { 'K', 'T', 'R', 'X' };
 
-                for (int row1 = 0; row1 < hasil.GetLength(0); row1++)
+                for (int row1 = 0; row1 < arr.GetLength(0); row1++)
                 {
-                    for (int col1 = 0; col1 < hasil.GetLength(1); col1++)
+                    for (int col1 = 0; col1 < arr.GetLength(1); col1++)
                     {
-                        if (!(valid.Contains(hasil[row1, col1])))
+                        if (!(valid.Contains(arr[row1, col1])))
                         {
                             dataGridView1.BackgroundColor = Color.Red;
                             checkElement = false;
                         }
                     }
                 }
+
                 if (checkElement)
                 {
-                    char[,] arr = test.toMatrix(fileName);
                     Stack<Points> treasure = new Stack<Points>();
+                    treasure = Algorithm.stackTreasure(arr);
+                    Points K = Algorithm.findK(arr);
                     Stack<Points> visited = new Stack<Points>();
-                    Stack<Points> unvisited = new Stack<Points>();
-                    treasure = Programs.stackTreasure(arr);
-                    Points K = Programs.findK(arr);
                     visited.Push(K);
-                    int step = 1;
+                    Stack<Points> unvisited = new Stack<Points>();
+                    Stack<Points> backtracking = new Stack<Points>();
+                    Stack<int> countNode = new Stack<int>();
+                    int countBacktracking = 0;
 
-                    dataGridView1.DataSource = GetDataTableFrom2DArray(arr);
+                    dataGridView1.DataSource = ConvertArrayToTable(arr);
                     dataGridView1.BackgroundColor = Color.Gold;
                     dataGridView1.DefaultCellStyle.BackColor = Color.Gold;
                     dataGridView1.GridColor = Color.Black;
@@ -236,42 +311,55 @@ namespace GUI_Demo
 
                     while (treasure.Count != 0)
                     {
-                        Console.WriteLine("Visited sekarang: " + visited.Peek().x + "," + visited.Peek().y);
+                        //Console.WriteLine("Visited sekarang: " + visited.Peek().x + "," + visited.Peek().y);
                         int xKunjung = (int)visited.Peek().x;
                         int yKunjung = (int)visited.Peek().y;
                         dataGridView1.Rows[xKunjung].Cells[yKunjung].Style.BackColor = Color.Orange;
-                        dataGridView1.Rows[xKunjung].Cells[yKunjung].Value = step;
-                        Programs.treasureArrived(treasure, visited.Peek());
-                        Programs.adjacentPoints(arr, visited, unvisited);
+                        Algorithm.treasureArrived(treasure, visited.Peek());
+                        countBacktracking = Algorithm.adjacentPoints(arr, visited, unvisited, backtracking, countBacktracking, countNode, treasure);
                         if (treasure.Count != 0)
                         {
-                            Programs.move(visited, unvisited);
-                            step++;
+                            Algorithm.move(visited, unvisited);
                         }
 
                         for (int row2 = 0; row2 < arr.GetLength(0); row2++)
                         {
                             for (int col2 = 0; col2 < arr.GetLength(1); col2++)
                             {
-                                char element = arr[row2, col2];
-                                if (element == 'X')
+                                char element2 = arr[row2, col2];
+                                if (element2 == 'X')
                                 {
                                     dataGridView1[col2, row2].Style.BackColor = Color.Black;
                                 }
-                                if (element == 'K')
+                                if (element2 == 'K')
                                 {
                                     dataGridView1[col2, row2].Style.BackColor = Color.Red;
-                                }
-                                if (element == 'T')
-                                {
-                                    dataGridView1[col2, row2].Style.BackColor = Color.LimeGreen;
                                 }
                             }
                         }
                     }
-                    Console.WriteLine("Jalannya lewat mana aja sihhh:");
-                    Programs.printStack(visited);
-                    textBox3.Text = visited.Count.ToString();
+
+                    Console.WriteLine("Jalannya lewat mana aja...");
+                    Algorithm.printStack(visited);
+                    Stack<Points> visitedCopy = visited;
+                    Points[] arrayStack = visitedCopy.ToArray();
+                    //Algorithm.printArray(arrayStack);
+
+                    for (int i = 0; i < arrayStack.GetLength(0); i++)
+                    {
+                        for (int j = i + 1; j < arrayStack.GetLength(0); j++)
+                        {
+                            if (arrayStack[i].x == arrayStack[j].x && arrayStack[i].y == arrayStack[j].y)
+                            {
+                                dataGridView1.Rows[arrayStack[i].x].Cells[arrayStack[i].y].Style.BackColor = Color.Brown;
+                            }
+                        }
+                    }
+                    int count = visited.Count;
+                    string direction = Algorithm.printStep(visited, count);
+                    textBox3.Text = (count-1).ToString();
+                    textBox4.Text = count.ToString();
+                    textBox5.Text = direction;
                 }
             }
         }
