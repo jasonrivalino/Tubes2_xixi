@@ -101,7 +101,7 @@ Langkah-langkah proses setup program adalah sebagai berikut:
 ![Screenshot 2023-03-24 215441](https://user-images.githubusercontent.com/91790457/227560277-d30ea6dd-c64d-403f-bcfc-7e0d3cf470ff.png)
 
 ## Video Demo Penjelasan
-Link: 
+Link: https://youtu.be/22WJvKkyisw
 
 ## Acknowledgements
 - Tuhan Yang Maha Esa
