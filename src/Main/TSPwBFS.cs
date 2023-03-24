@@ -59,6 +59,22 @@ namespace TSPwBFS
             }
             return count;
         }
+        
+        public int[,] lokasiTreasure(char[,] map, int baris, int kolom, int jumlah){
+            int[,] lokasi = new int[jumlah, 2];
+            int count = 0;
+            for (int m = 0; m < baris; m++)
+            {
+                for (int n = 0; n < kolom; n++)
+                    if (map[m, n] == 'T')
+                    {
+                        lokasi[count, 0] = m;
+                        lokasi[count, 1] = n;
+                        count++;
+                    }
+            }
+            return lokasi;
+        }
 
         public int[,] tambahTitik(int[,] array, int x, int y)
         {
