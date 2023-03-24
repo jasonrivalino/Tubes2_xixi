@@ -40,7 +40,7 @@ namespace TSPwBFS
                         lokasiPlayer[0] = k;
                         lokasiPlayer[1] = l;
                         //break;
-                        Console.WriteLine("FOUND");
+                        // Console.WriteLine("FOUND");
                     }
                 }
 
@@ -118,23 +118,24 @@ namespace TSPwBFS
             queue.Enqueue(new int[,] { { titikAwal[0], titikAwal[1] } });
             bool ketemu = false;
             bool pencarian = true;
+            int nodes = 0;
             while (pencarian == true)
             {
                 bool pojok = false;
                 int[,] simpul = queue.Dequeue();
                 // Console.Write("Queue diambil: ");
-                for (int c = 0; c < (simpul.Length / 2); c++)
-                {
-                    Console.Write("[" + simpul[c, 0] + "," + simpul[c, 1] + "], ");
-                }
-                Console.WriteLine();
+                // for (int c = 0; c < (simpul.Length / 2); c++)
+                // {
+                //     Console.Write("[" + simpul[c, 0] + "," + simpul[c, 1] + "], ");
+                // }
+                // Console.WriteLine();
                 int xSaatIni = simpul[0, 0];
                 int ySaatIni = simpul[0, 1];
-                Console.WriteLine("Posisi: " + xSaatIni + "," + ySaatIni);
+                // Console.WriteLine("Posisi: " + xSaatIni + "," + ySaatIni);
 
                 if (xSaatIni == 0 && ySaatIni == 0) //pojok kiri atas
                 {
-                    Console.WriteLine("ada di pojok kiri atas");
+                    //Console.WriteLine("ada di pojok kiri atas");
                     pojok = true;
                     if ((map[xSaatIni, ySaatIni + 1] == 'R' || map[xSaatIni, ySaatIni + 1] == 'T' || map[xSaatIni, ySaatIni + 1] == 'K') && ketemu == false  && tiwal.pernahDikunjungi(kujungan, xSaatIni, (ySaatIni + 1)) == false)
                     {
@@ -142,13 +143,14 @@ namespace TSPwBFS
                         {
                             ketemu = true;
                             jumlahT--;
-                            Console.WriteLine("Ketemu Treasure");
+                            // Console.WriteLine("Ketemu Treasure");
                         }
                         cariTSP cariTSP = new cariTSP();
                         int[,] titikBaru = cariTSP.tambahTitik(simpul, xSaatIni, (ySaatIni + 1));
                         kujungan = cariTSP.tambahTitik(kujungan, xSaatIni, (ySaatIni + 1));
                         queue.Enqueue(titikBaru);
-                        Console.WriteLine("kanan " + xSaatIni + "," + (ySaatIni + 1));
+                        nodes++;
+                        // Console.WriteLine("kanan " + xSaatIni + "," + (ySaatIni + 1));
                     }
 
                     if ((map[xSaatIni + 1, ySaatIni] == 'R' || map[xSaatIni + 1, ySaatIni] == 'T' || map[xSaatIni + 1, ySaatIni] == 'K') && ketemu == false && tiwal.pernahDikunjungi(kujungan, (xSaatIni + 1), ySaatIni) == false)
@@ -157,18 +159,19 @@ namespace TSPwBFS
                         {
                             ketemu = true;
                             jumlahT--;
-                            Console.WriteLine("Ketemu Treasure");
+                            // Console.WriteLine("Ketemu Treasure");
                         }
                         cariTSP cariTSP = new cariTSP();
                         int[,] titikBaru = cariTSP.tambahTitik(simpul, (xSaatIni + 1), ySaatIni);
                         kujungan = cariTSP.tambahTitik(kujungan, (xSaatIni + 1), ySaatIni);
                         queue.Enqueue(titikBaru);
-                        Console.WriteLine("bawah " + (xSaatIni + 1) + "," + ySaatIni);
+                        nodes++;
+                        // Console.WriteLine("bawah " + (xSaatIni + 1) + "," + ySaatIni);
                     }
                 }
                 else if (xSaatIni == 0 && ySaatIni == kolom - 1) //pojok kanan atas
                 {
-                    Console.WriteLine("ada di pojok kiri bawah");
+                    //Console.WriteLine("ada di pojok kiri bawah");
                     pojok = true;
                     if ((map[xSaatIni + 1, ySaatIni] == 'R' || map[xSaatIni + 1, ySaatIni] == 'T' || map[xSaatIni + 1, ySaatIni] == 'K') && ketemu == false && tiwal.pernahDikunjungi(kujungan, (xSaatIni + 1), ySaatIni) == false)
                     {
@@ -176,13 +179,14 @@ namespace TSPwBFS
                         {
                             ketemu = true;
                             jumlahT--;
-                            Console.WriteLine("Ketemu Treasure");
+                            // Console.WriteLine("Ketemu Treasure");
                         }
                         cariTSP cariTSP = new cariTSP();
                         int[,] titikBaru = cariTSP.tambahTitik(simpul, (xSaatIni + 1), ySaatIni);
                         kujungan = cariTSP.tambahTitik(kujungan, (xSaatIni + 1), ySaatIni);
                         queue.Enqueue(titikBaru);
-                        Console.WriteLine("bawah " + (xSaatIni + 1) + "," + ySaatIni);
+                        nodes++;
+                        // Console.WriteLine("bawah " + (xSaatIni + 1) + "," + ySaatIni);
                     }
                     if ((map[xSaatIni, ySaatIni - 1] == 'R' || map[xSaatIni, ySaatIni - 1] == 'T' || map[xSaatIni, ySaatIni - 1] == 'K') && ketemu == false && tiwal.pernahDikunjungi(kujungan, xSaatIni, (ySaatIni - 1)) == false)
                     {
@@ -190,20 +194,21 @@ namespace TSPwBFS
                         {
                             ketemu = true;
                             jumlahT--;
-                            Console.WriteLine("Ketemu Treasure");
+                            // Console.WriteLine("Ketemu Treasure");
                         }
                         cariTSP cariTSP = new cariTSP();
                         int[,] titikBaru = cariTSP.tambahTitik(simpul, xSaatIni, (ySaatIni - 1));
                         kujungan = cariTSP.tambahTitik(kujungan, xSaatIni, (ySaatIni - 1));
                         queue.Enqueue(titikBaru);
-                        Console.WriteLine("kiri " + xSaatIni + "," + (ySaatIni - 1));
+                        nodes++;
+                        // Console.WriteLine("kiri " + xSaatIni + "," + (ySaatIni - 1));
                     }
 
                 }
 
                 else if (xSaatIni == baris - 1 && ySaatIni == 0) //pojok kiri bawah
                 {
-                    Console.WriteLine("ada di pojok kiri bawah");
+                    //Console.WriteLine("ada di pojok kiri bawah");
                     pojok = true;
                     if ((map[xSaatIni, ySaatIni + 1] == 'R' || map[xSaatIni, ySaatIni + 1] == 'T' || map[xSaatIni, ySaatIni + 1] == 'K') && ketemu == false && tiwal.pernahDikunjungi(kujungan, xSaatIni, (ySaatIni + 1)) == false)
                     {
@@ -211,13 +216,14 @@ namespace TSPwBFS
                         {
                             ketemu = true;
                             jumlahT--;
-                            Console.WriteLine("Ketemu Treasure");
+                            // Console.WriteLine("Ketemu Treasure");
                         }
                         cariTSP cariTSP = new cariTSP();
                         int[,] titikBaru = cariTSP.tambahTitik(simpul, xSaatIni, (ySaatIni + 1));
                         kujungan = cariTSP.tambahTitik(kujungan, xSaatIni, (ySaatIni + 1));
                         queue.Enqueue(titikBaru);
-                        Console.WriteLine("kanan " + xSaatIni + "," + (ySaatIni + 1));
+                        nodes++;
+                        // Console.WriteLine("kanan " + xSaatIni + "," + (ySaatIni + 1));
                     }
 
                     if ((map[xSaatIni - 1, ySaatIni] == 'R' || map[xSaatIni - 1, ySaatIni] == 'T' || map[xSaatIni - 1, ySaatIni] == 'K') && ketemu == false && tiwal.pernahDikunjungi(kujungan, (xSaatIni - 1), ySaatIni) == false)
@@ -226,19 +232,20 @@ namespace TSPwBFS
                         {
                             ketemu = true;
                             jumlahT--;
-                            Console.WriteLine("Ketemu Treasure");
+                            // Console.WriteLine("Ketemu Treasure");
                         }
                         cariTSP cariTSP = new cariTSP();
                         int[,] titikBaru = cariTSP.tambahTitik(simpul, (xSaatIni - 1), ySaatIni);
                         kujungan = cariTSP.tambahTitik(kujungan, (xSaatIni - 1), ySaatIni);
                         queue.Enqueue(titikBaru);
-                        Console.WriteLine("atas " + (xSaatIni - 1) + "," + ySaatIni);
+                        nodes++;
+                        // Console.WriteLine("atas " + (xSaatIni - 1) + "," + ySaatIni);
                     }
                 }
 
                 else if (xSaatIni == baris - 1 && ySaatIni == kolom - 1)//pojok kanan bawah
                 {
-                    Console.WriteLine("ada di pojok kanan bawah");
+                    //Console.WriteLine("ada di pojok kanan bawah");
                     pojok = true;
                     if ((map[xSaatIni, ySaatIni - 1] == 'R' || map[xSaatIni, (ySaatIni - 1)] == 'T' || map[xSaatIni, ySaatIni - 1] == 'K') && ketemu == false && tiwal.pernahDikunjungi(kujungan, xSaatIni, (ySaatIni - 1)) == false)
                     {
@@ -246,13 +253,14 @@ namespace TSPwBFS
                         {
                             ketemu = true;
                             jumlahT--;
-                            Console.WriteLine("Ketemu Treasure");
+                            // Console.WriteLine("Ketemu Treasure");
                         }
                         cariTSP cariTSP = new cariTSP();
                         int[,] titikBaru = cariTSP.tambahTitik(simpul, xSaatIni, (ySaatIni - 1));
                         kujungan = cariTSP.tambahTitik(kujungan, xSaatIni, (ySaatIni - 1));
                         queue.Enqueue(titikBaru);
-                        Console.WriteLine("kiri " + xSaatIni + "," + (ySaatIni - 1));
+                        nodes++;
+                        // Console.WriteLine("kiri " + xSaatIni + "," + (ySaatIni - 1));
                     }
 
                     if ((map[xSaatIni - 1, ySaatIni] == 'R' || map[xSaatIni - 1, ySaatIni] == 'T' || map[xSaatIni - 1, ySaatIni] == 'K') && ketemu == false && tiwal.pernahDikunjungi(kujungan, (xSaatIni - 1), ySaatIni) == false)
@@ -261,31 +269,33 @@ namespace TSPwBFS
                         {
                             ketemu = true;
                             jumlahT--;
-                            Console.WriteLine("Ketemu Treasure");
+                            // Console.WriteLine("Ketemu Treasure");
                         }
                         cariTSP cariTSP = new cariTSP();
                         int[,] titikBaru = cariTSP.tambahTitik(simpul, (xSaatIni - 1), ySaatIni);
                         kujungan = cariTSP.tambahTitik(kujungan, (xSaatIni - 1), ySaatIni);
                         queue.Enqueue(titikBaru);
-                        Console.WriteLine("atas " + (xSaatIni - 1) + "," + ySaatIni);
+                        nodes++;
+                        // Console.WriteLine("atas " + (xSaatIni - 1) + "," + ySaatIni);
                     }
                 }
                 else if (xSaatIni == 0 && pojok == false) // ada di paling atas
                 {
-                    Console.WriteLine("ada di paling kiri");
+                    //Console.WriteLine("ada di paling kiri");
                     if ((map[xSaatIni, ySaatIni + 1] == 'R' || map[xSaatIni, ySaatIni + 1] == 'T' || map[xSaatIni, ySaatIni + 1] == 'K') && ketemu == false && tiwal.pernahDikunjungi(kujungan, xSaatIni, (ySaatIni + 1)) == false)
                     {
                         if (map[xSaatIni, ySaatIni + 1] == 'T')
                         {
                             ketemu = true;
                             jumlahT--;
-                            Console.WriteLine("Ketemu Treasure");
+                            // Console.WriteLine("Ketemu Treasure");
                         }
                         cariTSP cariTSP = new cariTSP();
                         int[,] titikBaru = cariTSP.tambahTitik(simpul, xSaatIni, (ySaatIni + 1));
                         kujungan = cariTSP.tambahTitik(kujungan, xSaatIni, (ySaatIni + 1));
                         queue.Enqueue(titikBaru);
-                        Console.WriteLine("kanan " + xSaatIni + "," + (ySaatIni + 1));
+                        nodes++;
+                        // Console.WriteLine("kanan " + xSaatIni + "," + (ySaatIni + 1));
                     }
 
                     if ((map[xSaatIni + 1, ySaatIni] == 'R' || map[xSaatIni + 1, ySaatIni] == 'T' || map[xSaatIni + 1, ySaatIni] == 'K') && ketemu == false && tiwal.pernahDikunjungi(kujungan, (xSaatIni + 1), ySaatIni) == false)
@@ -294,13 +304,14 @@ namespace TSPwBFS
                         {
                             ketemu = true;
                             jumlahT--;
-                            Console.WriteLine("Ketemu Treasure");
+                            // Console.WriteLine("Ketemu Treasure");
                         }
                         cariTSP cariTSP = new cariTSP();
                         int[,] titikBaru = cariTSP.tambahTitik(simpul, (xSaatIni + 1), ySaatIni);
                         kujungan = cariTSP.tambahTitik(kujungan, (xSaatIni + 1), ySaatIni);
                         queue.Enqueue(titikBaru);
-                        Console.WriteLine("bawah " + (xSaatIni + 1) + "," + ySaatIni);
+                        nodes++;
+                        // Console.WriteLine("bawah " + (xSaatIni + 1) + "," + ySaatIni);
                     }
 
                     if ((map[xSaatIni, ySaatIni - 1] == 'R' || map[xSaatIni, ySaatIni - 1] == 'T' || map[xSaatIni, ySaatIni - 1] == 'K') && ketemu == false && tiwal.pernahDikunjungi(kujungan, xSaatIni, (ySaatIni - 1)) == false)
@@ -309,32 +320,34 @@ namespace TSPwBFS
                         {
                             ketemu = true;
                             jumlahT--;
-                            Console.WriteLine("Ketemu Treasure");
+                            // Console.WriteLine("Ketemu Treasure");
                         }
                         cariTSP cariTSP = new cariTSP();
                         int[,] titikBaru = cariTSP.tambahTitik(simpul, xSaatIni, (ySaatIni - 1));
                         kujungan = cariTSP.tambahTitik(kujungan, xSaatIni, (ySaatIni - 1));
                         queue.Enqueue(titikBaru);
-                        Console.WriteLine("kiri " + xSaatIni + "," + (ySaatIni - 1));
+                        nodes++;
+                        // Console.WriteLine("kiri " + xSaatIni + "," + (ySaatIni - 1));
                     }
                 }
 
                 else if (xSaatIni == baris - 1 && pojok == false) // ada di paling bawah
                 {
-                    Console.WriteLine("ada di paling kiri");
+                    //Console.WriteLine("ada di paling kiri");
                     if ((map[xSaatIni, ySaatIni + 1] == 'R' || map[xSaatIni, ySaatIni + 1] == 'T' || map[xSaatIni, ySaatIni + 1] == 'K') && ketemu == false && tiwal.pernahDikunjungi(kujungan, xSaatIni, (ySaatIni + 1)) == false)
                     {
                         if (map[xSaatIni, ySaatIni + 1] == 'T')
                         {
                             ketemu = true;
                             jumlahT--;
-                            Console.WriteLine("Ketemu Treasure");
+                            // Console.WriteLine("Ketemu Treasure");
                         }
                         cariTSP cariTSP = new cariTSP();
                         int[,] titikBaru = cariTSP.tambahTitik(simpul, xSaatIni, (ySaatIni + 1));
                         kujungan = cariTSP.tambahTitik(kujungan, xSaatIni, (ySaatIni + 1));
                         queue.Enqueue(titikBaru);
-                        Console.WriteLine("kanan " + xSaatIni + "," + (ySaatIni + 1));
+                        nodes++;
+                        // Console.WriteLine("kanan " + xSaatIni + "," + (ySaatIni + 1));
                     }
 
                     if ((map[xSaatIni, ySaatIni - 1] == 'R' || map[xSaatIni, ySaatIni - 1] == 'T' || map[xSaatIni, ySaatIni - 1] == 'K') && ketemu == false && tiwal.pernahDikunjungi(kujungan, xSaatIni, (ySaatIni - 1)) == false)
@@ -343,13 +356,14 @@ namespace TSPwBFS
                         {
                             ketemu = true;
                             jumlahT--;
-                            Console.WriteLine("Ketemu Treasure");
+                            // Console.WriteLine("Ketemu Treasure");
                         }
                         cariTSP cariTSP = new cariTSP();
                         int[,] titikBaru = cariTSP.tambahTitik(simpul, xSaatIni, (ySaatIni - 1));
                         kujungan = cariTSP.tambahTitik(kujungan, xSaatIni, (ySaatIni - 1));
                         queue.Enqueue(titikBaru);
-                        Console.WriteLine("kiri " + xSaatIni + "," + (ySaatIni - 1));
+                        nodes++;
+                        // Console.WriteLine("kiri " + xSaatIni + "," + (ySaatIni - 1));
                     }
 
                     if ((map[xSaatIni - 1, ySaatIni] == 'R' || map[xSaatIni - 1, ySaatIni] == 'T' || map[xSaatIni - 1, ySaatIni] == 'K') && ketemu == false && tiwal.pernahDikunjungi(kujungan, (xSaatIni - 1), ySaatIni) == false)
@@ -358,32 +372,34 @@ namespace TSPwBFS
                         {
                             ketemu = true;
                             jumlahT--;
-                            Console.WriteLine("Ketemu Treasure");
+                            // Console.WriteLine("Ketemu Treasure");
                         }
                         cariTSP cariTSP = new cariTSP();
                         int[,] titikBaru = cariTSP.tambahTitik(simpul, (xSaatIni - 1), ySaatIni);
                         kujungan = cariTSP.tambahTitik(kujungan, (xSaatIni - 1), ySaatIni);
                         queue.Enqueue(titikBaru);
-                        Console.WriteLine("atas " + (xSaatIni - 1) + "," + ySaatIni);
+                        nodes++;
+                        // Console.WriteLine("atas " + (xSaatIni - 1) + "," + ySaatIni);
                     }
                 }
 
                 else if (ySaatIni == kolom - 1 && pojok == false) // ada di paling kanan
                 {
-                    Console.WriteLine("ada di paling kanan");
+                    //Console.WriteLine("ada di paling kanan");
                     if ((map[xSaatIni + 1, ySaatIni] == 'R' || map[xSaatIni + 1, ySaatIni] == 'T' || map[xSaatIni + 1, ySaatIni] == 'K') && ketemu == false && tiwal.pernahDikunjungi(kujungan, (xSaatIni + 1), ySaatIni) == false)
                     {
                         if (map[xSaatIni + 1, ySaatIni] == 'T')
                         {
                             ketemu = true;
                             jumlahT--;
-                            Console.WriteLine("Ketemu Treasure");
+                            // Console.WriteLine("Ketemu Treasure");
                         }
                         cariTSP cariTSP = new cariTSP();
                         int[,] titikBaru = cariTSP.tambahTitik(simpul, (xSaatIni + 1), ySaatIni);
                         kujungan = cariTSP.tambahTitik(kujungan, (xSaatIni + 1), ySaatIni);
                         queue.Enqueue(titikBaru);
-                        Console.WriteLine("kanan " + (xSaatIni + 1) + "," + ySaatIni);
+                        nodes++;
+                        // Console.WriteLine("kanan " + (xSaatIni + 1) + "," + ySaatIni);
                     }
 
                     if ((map[xSaatIni, ySaatIni - 1] == 'R' || map[xSaatIni, ySaatIni - 1] == 'T' || map[xSaatIni, ySaatIni - 1] == 'K') && ketemu == false && tiwal.pernahDikunjungi(kujungan, xSaatIni, (ySaatIni - 1)) == false)
@@ -392,13 +408,14 @@ namespace TSPwBFS
                         {
                             ketemu = true;
                             jumlahT--;
-                            Console.WriteLine("Ketemu Treasure");
+                            // Console.WriteLine("Ketemu Treasure");
                         }
                         cariTSP cariTSP = new cariTSP();
                         int[,] titikBaru = cariTSP.tambahTitik(simpul, xSaatIni, (ySaatIni - 1));
                         kujungan = cariTSP.tambahTitik(kujungan, xSaatIni, (ySaatIni - 1));
                         queue.Enqueue(titikBaru);
-                        Console.WriteLine("kiri " + xSaatIni + "," + (ySaatIni - 1));
+                        nodes++;
+                        // Console.WriteLine("kiri " + xSaatIni + "," + (ySaatIni - 1));
                     }
 
                     if ((map[xSaatIni - 1, ySaatIni] == 'R' || map[xSaatIni - 1, ySaatIni] == 'T' || map[xSaatIni - 1, ySaatIni] == 'K') && ketemu == false && tiwal.pernahDikunjungi(kujungan, (xSaatIni - 1), ySaatIni) == false)
@@ -407,32 +424,34 @@ namespace TSPwBFS
                         {
                             ketemu = true;
                             jumlahT--;
-                            Console.WriteLine("Ketemu Treasure");
+                            // Console.WriteLine("Ketemu Treasure");
                         }
                         cariTSP cariTSP = new cariTSP();
                         int[,] titikBaru = cariTSP.tambahTitik(simpul, (xSaatIni - 1), ySaatIni);
                         kujungan = cariTSP.tambahTitik(kujungan, (xSaatIni - 1), ySaatIni);
                         queue.Enqueue(titikBaru);
-                        Console.WriteLine("atas " + (xSaatIni - 1) + "," + ySaatIni);
+                        nodes++;
+                        // Console.WriteLine("atas " + (xSaatIni - 1) + "," + ySaatIni);
                     }
                 }
 
                 else if (ySaatIni == 0 && pojok == false) // ada di paling kiri
                 {
-                    Console.WriteLine("ada di paling atas");
+                    //Console.WriteLine("ada di paling atas");
                     if ((map[xSaatIni, ySaatIni + 1] == 'R' || map[xSaatIni, ySaatIni + 1] == 'T' || map[xSaatIni, ySaatIni + 1] == 'K') && ketemu == false && tiwal.pernahDikunjungi(kujungan, xSaatIni, (ySaatIni + 1)) == false)
                     {
                         if (map[xSaatIni, ySaatIni + 1] == 'T')
                         {
                             ketemu = true;
                             jumlahT--;
-                            Console.WriteLine("Ketemu Treasure");
+                            // Console.WriteLine("Ketemu Treasure");
                         }
                         cariTSP cariTSP = new cariTSP();
                         int[,] titikBaru = cariTSP.tambahTitik(simpul, xSaatIni, (ySaatIni + 1));
                         kujungan = cariTSP.tambahTitik(kujungan, xSaatIni, (ySaatIni + 1));
                         queue.Enqueue(titikBaru);
-                        Console.WriteLine("kanan " + xSaatIni + "," + (ySaatIni + 1));
+                        nodes++;
+                        // Console.WriteLine("kanan " + xSaatIni + "," + (ySaatIni + 1));
                     }
 
                     if ((map[xSaatIni + 1, ySaatIni] == 'R' || map[xSaatIni + 1, ySaatIni] == 'T' || map[xSaatIni + 1, ySaatIni] == 'K') && ketemu == false  && tiwal.pernahDikunjungi(kujungan, (xSaatIni + 1), ySaatIni) == false)
@@ -441,13 +460,14 @@ namespace TSPwBFS
                         {
                             ketemu = true;
                             jumlahT--;
-                            Console.WriteLine("Ketemu Treasure");
+                            // Console.WriteLine("Ketemu Treasure");
                         }
                         cariTSP cariTSP = new cariTSP();
                         int[,] titikBaru = cariTSP.tambahTitik(simpul, (xSaatIni + 1), ySaatIni);
                         kujungan = cariTSP.tambahTitik(kujungan, (xSaatIni + 1), ySaatIni);
                         queue.Enqueue(titikBaru);
-                        Console.WriteLine("bawah " + (xSaatIni + 1) + "," + ySaatIni);
+                        nodes++;
+                        // Console.WriteLine("bawah " + (xSaatIni + 1) + "," + ySaatIni);
                     }
 
                     if ((map[xSaatIni - 1, ySaatIni] == 'R' || map[xSaatIni - 1, ySaatIni] == 'T' || map[xSaatIni - 1, ySaatIni] == 'K') && ketemu == false && tiwal.pernahDikunjungi(kujungan, (xSaatIni - 1), ySaatIni) == false)
@@ -456,13 +476,14 @@ namespace TSPwBFS
                         {
                             ketemu = true;
                             jumlahT--;
-                            Console.WriteLine("Ketemu Treasure");
+                            // Console.WriteLine("Ketemu Treasure");
                         }
                         cariTSP cariTSP = new cariTSP();
                         int[,] titikBaru = cariTSP.tambahTitik(simpul, (xSaatIni - 1), ySaatIni);
                         kujungan = cariTSP.tambahTitik(kujungan, (xSaatIni - 1), ySaatIni);
                         queue.Enqueue(titikBaru);
-                        Console.WriteLine("atas " + (xSaatIni - 1) + "," + ySaatIni);
+                        nodes++;
+                        // Console.WriteLine("atas " + (xSaatIni - 1) + "," + ySaatIni);
                     }
                 }
 
@@ -470,18 +491,19 @@ namespace TSPwBFS
                 {
                     if ((map[xSaatIni, ySaatIni + 1] == 'R' || map[xSaatIni, ySaatIni + 1] == 'T' || map[xSaatIni, ySaatIni + 1] == 'K') && ketemu == false && tiwal.pernahDikunjungi(kujungan, xSaatIni, (ySaatIni + 1)) == false)
                     {
-                        Console.WriteLine("ada di tengah");
+                        //Console.WriteLine("ada di tengah");
                         if (map[xSaatIni, ySaatIni + 1] == 'T')
                         {
                             ketemu = true;
                             jumlahT--;
-                            Console.WriteLine("Ketemu Treasure");
+                            // Console.WriteLine("Ketemu Treasure");
                         }
                         cariTSP cariTSP = new cariTSP();
                         int[,] titikBaru = cariTSP.tambahTitik(simpul, xSaatIni, (ySaatIni + 1));
                         kujungan = cariTSP.tambahTitik(kujungan, xSaatIni, (ySaatIni + 1));
                         queue.Enqueue(titikBaru);
-                        Console.WriteLine("kanan " + xSaatIni + "," + (ySaatIni + 1));
+                        nodes++;
+                        // Console.WriteLine("kanan " + xSaatIni + "," + (ySaatIni + 1));
                     }
 
                     if ((map[xSaatIni + 1, ySaatIni] == 'R' || map[xSaatIni + 1, ySaatIni] == 'T' || map[xSaatIni + 1, ySaatIni] == 'K') && ketemu == false && tiwal.pernahDikunjungi(kujungan, (xSaatIni + 1), ySaatIni) == false)
@@ -490,13 +512,14 @@ namespace TSPwBFS
                         {
                             ketemu = true;
                             jumlahT--;
-                            Console.WriteLine("Ketemu Treasure");
+                            // Console.WriteLine("Ketemu Treasure");
                         }
                         cariTSP cariTSP = new cariTSP();
                         int[,] titikBaru = cariTSP.tambahTitik(simpul, (xSaatIni + 1), ySaatIni);
                         kujungan = cariTSP.tambahTitik(kujungan, (xSaatIni + 1), ySaatIni);
                         queue.Enqueue(titikBaru);
-                        Console.WriteLine("bawah " + (xSaatIni + 1) + "," + ySaatIni);
+                        nodes++;
+                        // Console.WriteLine("bawah " + (xSaatIni + 1) + "," + ySaatIni);
                     }
 
                     if ((map[xSaatIni, ySaatIni - 1] == 'R' || map[xSaatIni, ySaatIni - 1] == 'T' || map[xSaatIni, ySaatIni - 1] == 'K') && ketemu == false && tiwal.pernahDikunjungi(kujungan, xSaatIni, (ySaatIni - 1)) == false)
@@ -505,13 +528,14 @@ namespace TSPwBFS
                         {
                             ketemu = true;
                             jumlahT--;
-                            Console.WriteLine("Ketemu Treasure");
+                            // Console.WriteLine("Ketemu Treasure");
                         }
                         cariTSP cariTSP = new cariTSP();
                         int[,] titikBaru = cariTSP.tambahTitik(simpul, xSaatIni, (ySaatIni - 1));
                         kujungan = cariTSP.tambahTitik(kujungan, xSaatIni, (ySaatIni - 1));
                         queue.Enqueue(titikBaru);
-                        Console.WriteLine("kiri " + xSaatIni + "," + (ySaatIni - 1));
+                        nodes++;
+                        // Console.WriteLine("kiri " + xSaatIni + "," + (ySaatIni - 1));
                     }
 
                     if ((map[xSaatIni - 1, ySaatIni] == 'R' || map[xSaatIni - 1, ySaatIni] == 'T' || map[xSaatIni - 1, ySaatIni] == 'K') && ketemu == false && tiwal.pernahDikunjungi(kujungan, (xSaatIni - 1), ySaatIni) == false)
@@ -520,51 +544,52 @@ namespace TSPwBFS
                         {
                             ketemu = true;
                             jumlahT--;
-                            Console.WriteLine("Ketemu Treasure");
+                            // Console.WriteLine("Ketemu Treasure");
                         }
                         cariTSP cariTSP = new cariTSP();
                         int[,] titikBaru = cariTSP.tambahTitik(simpul, (xSaatIni - 1), ySaatIni);
                         kujungan = cariTSP.tambahTitik(kujungan, (xSaatIni - 1), ySaatIni);
                         queue.Enqueue(titikBaru);
-                        Console.WriteLine("atas " + (xSaatIni - 1) + "," + ySaatIni);
+                        nodes++;
+                        // Console.WriteLine("atas " + (xSaatIni - 1) + "," + ySaatIni);
                     }
                 }
 
-                Console.Write("Queue Saat ini: ");
-                for (int i = 0; i < queue.Count; i++)
-                {
-                    Console.Write("{");
-                    for (int j = 0; j < (queue.ElementAt(i).Length / 2); j++)
-                    {
-                        Console.Write("[" + queue.ElementAt(i)[j, 0] + "," + queue.ElementAt(i)[j, 1] + "], ");
-                    }
-                    Console.Write("}, ");
-                }
-                Console.WriteLine();
+                // Console.Write("Queue Saat ini: ");
+                // for (int i = 0; i < queue.Count; i++)
+                // {
+                //     Console.Write("{");
+                //     for (int j = 0; j < (queue.ElementAt(i).Length / 2); j++)
+                //     {
+                //         Console.Write("[" + queue.ElementAt(i)[j, 0] + "," + queue.ElementAt(i)[j, 1] + "], ");
+                //     }
+                //     Console.Write("}, ");
+                // }
+                // Console.WriteLine();
 
                 if (ketemu == true)
                 {
-                    Console.WriteLine("---queue---");
+                    // Console.WriteLine("---queue---");
                     int harusDequeue = queue.Count;
-                    Console.WriteLine("jumlah queue = " + harusDequeue);
+                    // Console.WriteLine("jumlah queue = " + harusDequeue);
                     for (int a = 0; a < harusDequeue - 1; a++)
                     {
                         int[,] buang = queue.Dequeue();
-                        for (int k = 0; k < buang.Length / 2; k++)
-                        {
-                            Console.Write("[" + buang[k, 0] + "," + buang[k, 1] + "], ");
-                        }
-                        Console.WriteLine();
+                        // for (int k = 0; k < buang.Length / 2; k++)
+                        // {
+                            // Console.Write("[" + buang[k, 0] + "," + buang[k, 1] + "], ");
+                        // }
+                        // Console.WriteLine();
                     }
-                    Console.WriteLine("---dibuang---");
+                    // Console.WriteLine("---dibuang---");
                     map[queue.ElementAt(0)[0, 0], queue.ElementAt(0)[0, 1]] = 'R';
 
-                    Console.Write("jalur saat ini = ");
-                    for (int k = 0; k < (queue.ElementAt(0).Length / 2); k++)
-                    {
-                        Console.Write("[" + queue.ElementAt(0)[k, 0] + "," + queue.ElementAt(0)[k, 1] + "], ");
-                    }
-                    Console.WriteLine();
+                    // Console.Write("jalur saat ini = ");
+                    // for (int k = 0; k < (queue.ElementAt(0).Length / 2); k++)
+                    // {
+                    //     Console.Write("[" + queue.ElementAt(0)[k, 0] + "," + queue.ElementAt(0)[k, 1] + "], ");
+                    // }
+                    // Console.WriteLine();
 
                     if (jumlahT > 0)
                     {
@@ -588,6 +613,8 @@ namespace TSPwBFS
                 }
             }
             int[,] hasil = queue.Dequeue();
+            cariTSP tambah = new cariTSP();
+            hasil = tambah.tambahTitik(hasil, nodes, 0);
             for (int i = 0; i < hasil.Length / 2 / 2; i++)
             {
                 int temp = hasil[i, 0];
@@ -598,12 +625,14 @@ namespace TSPwBFS
                 hasil[i, 1] = hasil[hasil.Length / 2 - i - 1, 1];
                 hasil[hasil.Length / 2 - i - 1, 1] = temp1;
             }
-            Console.WriteLine("Hasil BFS: ");
-            for (int i = 0; i < hasil.Length / 2; i++)
-            {
-                Console.Write("[" + hasil[i, 0] + "," + hasil[i, 1] + "], ");
-            }
-            Console.WriteLine();
+            // Console.WriteLine("Hasil BFS: ");
+            // for (int i = 0; i < hasil.Length / 2; i++)
+            // {
+            //     Console.Write("[" + hasil[i, 0] + "," + hasil[i, 1] + "], ");
+            // }
+            // Console.WriteLine();
+
+            Console.WriteLine("nodes = " + nodes);
 
             return hasil;
         }
