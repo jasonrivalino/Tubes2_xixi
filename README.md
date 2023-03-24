@@ -35,8 +35,10 @@
 * [Requirements](#requirements)
 * [Cara Menjalankan Program](#cara-menjalankan-program)
 * [Tampilan Interface Program](#tampilan-interface-program)
+* [Video Demo Penjelasan](#video-demo-penjelasan)
 * [Acknowledgements](#acknowledgements)
 * [Foto Bersama](#foto-bersama)
+
 ## Deskripsi Singkat 
 Repository ini berisi aplikasi dengan GUI sederhana untuk mengimplementasikan algoritma BFS dan DFS untuk memperoleh seluruh harta karun dari titik awal. Program ini dibuat dengan menggunakan bahasa C# dan memanfaatkan Windows Forms untuk membuat GUInya. Program dapat membaca sebuah file txt yang berisi maze yang akan dicari solusi rute untuk mendapatkan treasurenya. Untuk penelusuran harta, pengguna bisa memilih secara bebas antara penelusuran secara melebar menggunakan algoritma BFS ataupun penelusuran secara mendalam menggunakan algoritma DFS. Pergerakan hanya bisa dilakukan keatas, bawah, kiri, dan, kanan (tidak ada gerakan diagonal).
 
@@ -46,6 +48,8 @@ Repository ini berisi aplikasi dengan GUI sederhana untuk mengimplementasikan al
 - T: Treasure -> dilambangkan dengan warna hijau pada peta
 - R: grid yang mungkin diakses (sebuah lintasan) -> dilambangkan dengan warna emas pada peta
 - X: grid halangan yang tidak dapat diakses -> dilambangkan dengan warna hitam pada peta
+- Grid yang dilewati hanya 1x -> dilambangkan dengan warna orange pada peta
+- Grid yang dilewati lebih dari 1x -> dilambangkan dengan warna coklat pada peta
 
 2. Keterangan Prioritas Pembangkit Arah Simpul: (Right Down Left Up / RDLU)
 
@@ -56,6 +60,23 @@ Repository ini berisi aplikasi dengan GUI sederhana untuk mengimplementasikan al
  ┣ 📂doc
  ┃ ┗ 📜xixi_018.pdf
  ┣ 📂src
+ ┃ ┣ 📂.vs
+ ┃ ┣ 📂properties
+ ┃ ┣ 📂bin
+ ┃ ┣ 📂obj
+ ┃ ┣ 📜App.config
+ ┃ ┣ 📜BFS.cs
+ ┃ ┣ 📜DFS.cs
+ ┃ ┣ 📜Form1.Designer.cs
+ ┃ ┣ 📜Form1.cs
+ ┃ ┣ 📜Form1.resx
+ ┃ ┣ 📜MazeSolver.csproj
+ ┃ ┣ 📜MazeSolver.csproj.user
+ ┃ ┣ 📜MazeSolver.sln
+ ┃ ┣ 📜Program.cs
+ ┃ ┣ 📜TSPwBFS.cs
+ ┃ ┣ 📜bacaFile.cs
+ ┃ ┗ 📜background.jpg
  ┣ 📂test
  ┃ ┣ 📜sample-1.txt
  ┃ ┣ 📜sample-2.txt
@@ -73,11 +94,14 @@ Repository ini berisi aplikasi dengan GUI sederhana untuk mengimplementasikan al
 ## Cara Menjalankan Program
 Langkah-langkah proses setup program adalah sebagai berikut:
 1. Clone repository ini
-2. Buka file `MazeSolver.sln` dari repository ini
+2. Buka file `MazeSolver.sln` dari repository ini yang terdapat pada folder src
 3. Jalankan program dengan mengklik tombol Run atau tekan F5 pada keyboard di Visual Studio 2022
 
 ## Tampilan Interface Program
-![Screenshot 2023-03-23 221723](https://user-images.githubusercontent.com/91790457/227250484-22e35d54-1feb-49c8-b4dc-15decb1d890f.png)
+![Screenshot 2023-03-24 215441](https://user-images.githubusercontent.com/91790457/227560277-d30ea6dd-c64d-403f-bcfc-7e0d3cf470ff.png)
+
+## Video Demo Penjelasan
+Link: 
 
 ## Acknowledgements
 - Tuhan Yang Maha Esa
