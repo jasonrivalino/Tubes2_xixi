@@ -34,6 +34,7 @@
 * [Struktur File](#struktur-file)
 * [Requirements](#requirements)
 * [Cara Menjalankan Program](#cara-menjalankan-program)
+* [Cara Mengoperasikan Program](#cara-mengoperasikan-program)
 * [Tampilan Interface Program](#tampilan-interface-program)
 * [Video Demo Penjelasan](#video-demo-penjelasan)
 * [Acknowledgements](#acknowledgements)
@@ -96,6 +97,14 @@ Langkah-langkah proses setup program adalah sebagai berikut:
 1. Clone repository ini
 2. Buka file `MazeSolver.sln` dari repository ini yang terdapat pada folder src
 3. Jalankan program dengan mengklik tombol Run atau tekan F5 pada keyboard di Visual Studio 2022
+
+## Cara Mengoperasikan Program
+1. Menyiapkan file.txt yang berisi map
+2. Menekan tombol find pada program untuk mencari program txt yang ingin dipetakan
+3. Setelah didapatkan filenya, melakukan pemilihan algoritma untuk mencari rute (bisa BFS, DFS, atau TSP)
+4. Jika ingin melihat visualisasi peta, dapat menekan tombol visualize dan peta akan ditampilkan pada grid
+5. Untuk mencari jarak dengan algoritma yang dipilih, setelah memilih file, dapat menekan tombol search dan peta pencarian akan langsung ditampilkan
+6. Untuk reset program kembali ke default, dapat menekan tombol reset
 
 ## Tampilan Interface Program
 ![Screenshot 2023-03-24 215441](https://user-images.githubusercontent.com/91790457/227560277-d30ea6dd-c64d-403f-bcfc-7e0d3cf470ff.png)
