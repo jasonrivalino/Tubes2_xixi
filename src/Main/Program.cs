@@ -1,5 +1,6 @@
 ﻿using bacaFile;
 using BFS;
+using TSPwBFS;
 using System.Data;
 using System.Numerics;
 using System.Runtime.CompilerServices;
@@ -27,7 +28,7 @@ public class Program
             Console.WriteLine();
         }
 
-        cariBFS aaa = new cariBFS();
+        cariTSP aaa = new cariTSP();
         int[] lokasiPlayer = new int[2];
         lokasiPlayer = aaa.cariPlayer(hasil, baris, kolom);
         Console.Write(lokasiPlayer[0] + ",");
@@ -46,6 +47,12 @@ public class Program
 
         int[,] jalan = aaa.cariJalan(hasil, baris, kolom, lokasiPlayer);
 
+        Console.WriteLine("rute: ");
+        for (int i = 0; i < jalan.Length/2; i++)
+        {
+            Console.Write("["+jalan[i, 0] + "," + jalan[i, 1] + "], ");
+        }
+        Console.WriteLine();
         string hasilJalan = aaa.printStep(jalan);
         Console.WriteLine("arah: "+ hasilJalan);
 
