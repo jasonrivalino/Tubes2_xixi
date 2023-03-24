@@ -126,6 +126,7 @@ namespace BFS
             queue.Enqueue(new int[,] { { titikAwal[0], titikAwal[1] } });
             bool ketemu = false;
             bool pencarian = true;
+            int nodes = 0;
             while (pencarian == true)
             {
                 bool pojok = false;
@@ -156,6 +157,7 @@ namespace BFS
                         int[,] titikBaru = cariBFS.tambahTitik(simpul, xSaatIni, (ySaatIni + 1));
                         kujungan = cariBFS.tambahTitik(kujungan, xSaatIni, (ySaatIni + 1));
                         queue.Enqueue(titikBaru);
+                        nodes++;
                         // //Console.WriteLine("kanan " + xSaatIni + "," + (ySaatIni + 1));
                     }
 
@@ -171,6 +173,7 @@ namespace BFS
                         int[,] titikBaru = cariBFS.tambahTitik(simpul, (xSaatIni + 1), ySaatIni);
                         kujungan = cariBFS.tambahTitik(kujungan, (xSaatIni + 1), ySaatIni);
                         queue.Enqueue(titikBaru);
+                        nodes++;
                         // //Console.WriteLine("bawah " + (xSaatIni + 1) + "," + ySaatIni);
                     }
                 }
@@ -190,6 +193,7 @@ namespace BFS
                         int[,] titikBaru = cariBFS.tambahTitik(simpul, (xSaatIni + 1), ySaatIni);
                         kujungan = cariBFS.tambahTitik(kujungan, (xSaatIni + 1), ySaatIni);
                         queue.Enqueue(titikBaru);
+                        nodes++;
                         // //Console.WriteLine("bawah " + (xSaatIni + 1) + "," + ySaatIni);
                     }
                     if ((map[xSaatIni, ySaatIni - 1] == 'R' || map[xSaatIni, ySaatIni - 1] == 'T' || map[xSaatIni, ySaatIni - 1] == 'K') && ketemu == false && tiwal.pernahDikunjungi(kujungan, xSaatIni, (ySaatIni - 1)) == false)
@@ -204,6 +208,7 @@ namespace BFS
                         int[,] titikBaru = cariBFS.tambahTitik(simpul, xSaatIni, (ySaatIni - 1));
                         kujungan = cariBFS.tambahTitik(kujungan, xSaatIni, (ySaatIni - 1));
                         queue.Enqueue(titikBaru);
+                        nodes++;
                         // //Console.WriteLine("kiri " + xSaatIni + "," + (ySaatIni - 1));
                     }
 
@@ -225,6 +230,7 @@ namespace BFS
                         int[,] titikBaru = cariBFS.tambahTitik(simpul, xSaatIni, (ySaatIni + 1));
                         kujungan = cariBFS.tambahTitik(kujungan, xSaatIni, (ySaatIni + 1));
                         queue.Enqueue(titikBaru);
+                        nodes++;
                         // //Console.WriteLine("kanan " + xSaatIni + "," + (ySaatIni + 1));
                     }
 
@@ -240,6 +246,7 @@ namespace BFS
                         int[,] titikBaru = cariBFS.tambahTitik(simpul, (xSaatIni - 1), ySaatIni);
                         kujungan = cariBFS.tambahTitik(kujungan, (xSaatIni - 1), ySaatIni);
                         queue.Enqueue(titikBaru);
+                        nodes++;
                         // //Console.WriteLine("atas " + (xSaatIni - 1) + "," + ySaatIni);
                     }
                 }
@@ -260,6 +267,7 @@ namespace BFS
                         int[,] titikBaru = cariBFS.tambahTitik(simpul, xSaatIni, (ySaatIni - 1));
                         kujungan = cariBFS.tambahTitik(kujungan, xSaatIni, (ySaatIni - 1));
                         queue.Enqueue(titikBaru);
+                        nodes++;
                         // //Console.WriteLine("kiri " + xSaatIni + "," + (ySaatIni - 1));
                     }
 
@@ -275,6 +283,7 @@ namespace BFS
                         int[,] titikBaru = cariBFS.tambahTitik(simpul, (xSaatIni - 1), ySaatIni);
                         kujungan = cariBFS.tambahTitik(kujungan, (xSaatIni - 1), ySaatIni);
                         queue.Enqueue(titikBaru);
+                        nodes++;
                         // //Console.WriteLine("atas " + (xSaatIni - 1) + "," + ySaatIni);
                     }
                 }
@@ -293,6 +302,7 @@ namespace BFS
                         int[,] titikBaru = cariBFS.tambahTitik(simpul, xSaatIni, (ySaatIni + 1));
                         kujungan = cariBFS.tambahTitik(kujungan, xSaatIni, (ySaatIni + 1));
                         queue.Enqueue(titikBaru);
+                        nodes++;
                         // //Console.WriteLine("kanan " + xSaatIni + "," + (ySaatIni + 1));
                     }
 
@@ -308,6 +318,7 @@ namespace BFS
                         int[,] titikBaru = cariBFS.tambahTitik(simpul, (xSaatIni + 1), ySaatIni);
                         kujungan = cariBFS.tambahTitik(kujungan, (xSaatIni + 1), ySaatIni);
                         queue.Enqueue(titikBaru);
+                        nodes++;
                         // //Console.WriteLine("bawah " + (xSaatIni + 1) + "," + ySaatIni);
                     }
 
@@ -323,6 +334,7 @@ namespace BFS
                         int[,] titikBaru = cariBFS.tambahTitik(simpul, xSaatIni, (ySaatIni - 1));
                         kujungan = cariBFS.tambahTitik(kujungan, xSaatIni, (ySaatIni - 1));
                         queue.Enqueue(titikBaru);
+                        nodes++;
                         // //Console.WriteLine("kiri " + xSaatIni + "," + (ySaatIni - 1));
                     }
                 }
@@ -342,6 +354,7 @@ namespace BFS
                         int[,] titikBaru = cariBFS.tambahTitik(simpul, xSaatIni, (ySaatIni + 1));
                         kujungan = cariBFS.tambahTitik(kujungan, xSaatIni, (ySaatIni + 1));
                         queue.Enqueue(titikBaru);
+                        nodes++;
                         //Console.WriteLine("kanan " + xSaatIni + "," + (ySaatIni + 1));
                     }
 
@@ -357,6 +370,7 @@ namespace BFS
                         int[,] titikBaru = cariBFS.tambahTitik(simpul, xSaatIni, (ySaatIni - 1));
                         kujungan = cariBFS.tambahTitik(kujungan, xSaatIni, (ySaatIni - 1));
                         queue.Enqueue(titikBaru);
+                        nodes++;
                         //Console.WriteLine("kiri " + xSaatIni + "," + (ySaatIni - 1));
                     }
 
@@ -372,6 +386,7 @@ namespace BFS
                         int[,] titikBaru = cariBFS.tambahTitik(simpul, (xSaatIni - 1), ySaatIni);
                         kujungan = cariBFS.tambahTitik(kujungan, (xSaatIni - 1), ySaatIni);
                         queue.Enqueue(titikBaru);
+                        nodes++;
                         //Console.WriteLine("atas " + (xSaatIni - 1) + "," + ySaatIni);
                     }
                 }
@@ -391,6 +406,7 @@ namespace BFS
                         int[,] titikBaru = cariBFS.tambahTitik(simpul, (xSaatIni + 1), ySaatIni);
                         kujungan = cariBFS.tambahTitik(kujungan, (xSaatIni + 1), ySaatIni);
                         queue.Enqueue(titikBaru);
+                        nodes++;
                         //Console.WriteLine("kanan " + (xSaatIni + 1) + "," + ySaatIni);
                     }
 
@@ -406,6 +422,7 @@ namespace BFS
                         int[,] titikBaru = cariBFS.tambahTitik(simpul, xSaatIni, (ySaatIni - 1));
                         kujungan = cariBFS.tambahTitik(kujungan, xSaatIni, (ySaatIni - 1));
                         queue.Enqueue(titikBaru);
+                        nodes++;
                         //Console.WriteLine("kiri " + xSaatIni + "," + (ySaatIni - 1));
                     }
 
@@ -421,6 +438,7 @@ namespace BFS
                         int[,] titikBaru = cariBFS.tambahTitik(simpul, (xSaatIni - 1), ySaatIni);
                         kujungan = cariBFS.tambahTitik(kujungan, (xSaatIni - 1), ySaatIni);
                         queue.Enqueue(titikBaru);
+                        nodes++;
                         //Console.WriteLine("atas " + (xSaatIni - 1) + "," + ySaatIni);
                     }
                 }
@@ -440,6 +458,7 @@ namespace BFS
                         int[,] titikBaru = cariBFS.tambahTitik(simpul, xSaatIni, (ySaatIni + 1));
                         kujungan = cariBFS.tambahTitik(kujungan, xSaatIni, (ySaatIni + 1));
                         queue.Enqueue(titikBaru);
+                        nodes++;
                         //Console.WriteLine("kanan " + xSaatIni + "," + (ySaatIni + 1));
                     }
 
@@ -455,6 +474,7 @@ namespace BFS
                         int[,] titikBaru = cariBFS.tambahTitik(simpul, (xSaatIni + 1), ySaatIni);
                         kujungan = cariBFS.tambahTitik(kujungan, (xSaatIni + 1), ySaatIni);
                         queue.Enqueue(titikBaru);
+                        nodes++;
                         //Console.WriteLine("bawah " + (xSaatIni + 1) + "," + ySaatIni);
                     }
 
@@ -470,6 +490,7 @@ namespace BFS
                         int[,] titikBaru = cariBFS.tambahTitik(simpul, (xSaatIni - 1), ySaatIni);
                         kujungan = cariBFS.tambahTitik(kujungan, (xSaatIni - 1), ySaatIni);
                         queue.Enqueue(titikBaru);
+                        nodes++;
                         //Console.WriteLine("atas " + (xSaatIni - 1) + "," + ySaatIni);
                     }
                 }
@@ -489,6 +510,7 @@ namespace BFS
                         int[,] titikBaru = cariBFS.tambahTitik(simpul, xSaatIni, (ySaatIni + 1));
                         kujungan = cariBFS.tambahTitik(kujungan, xSaatIni, (ySaatIni + 1));
                         queue.Enqueue(titikBaru);
+                        nodes++;
                         //Console.WriteLine("kanan " + xSaatIni + "," + (ySaatIni + 1));
                     }
 
@@ -504,6 +526,7 @@ namespace BFS
                         int[,] titikBaru = cariBFS.tambahTitik(simpul, (xSaatIni + 1), ySaatIni);
                         kujungan = cariBFS.tambahTitik(kujungan, (xSaatIni + 1), ySaatIni);
                         queue.Enqueue(titikBaru);
+                        nodes++;
                         //Console.WriteLine("bawah " + (xSaatIni + 1) + "," + ySaatIni);
                     }
 
@@ -519,6 +542,7 @@ namespace BFS
                         int[,] titikBaru = cariBFS.tambahTitik(simpul, xSaatIni, (ySaatIni - 1));
                         kujungan = cariBFS.tambahTitik(kujungan, xSaatIni, (ySaatIni - 1));
                         queue.Enqueue(titikBaru);
+                        nodes++;
                         //Console.WriteLine("kiri " + xSaatIni + "," + (ySaatIni - 1));
                     }
 
@@ -534,6 +558,7 @@ namespace BFS
                         int[,] titikBaru = cariBFS.tambahTitik(simpul, (xSaatIni - 1), ySaatIni);
                         kujungan = cariBFS.tambahTitik(kujungan, (xSaatIni - 1), ySaatIni);
                         queue.Enqueue(titikBaru);
+                        nodes++;
                         //Console.WriteLine("atas " + (xSaatIni - 1) + "," + ySaatIni);
                     }
                 }
@@ -598,6 +623,8 @@ namespace BFS
                 }
             }
             int[,] hasil = queue.Dequeue();
+            cariBFS tambah = new cariBFS();
+            hasil = tambah.tambahTitik(hasil, nodes, 0);
             for (int i = 0; i < hasil.Length/2 /2; i++)
             {
                 int temp = hasil[i, 0];
@@ -609,10 +636,13 @@ namespace BFS
                 hasil[hasil.Length/2 - i - 1, 1] = temp1;
             }
             // //Console.WriteLine("Hasil BFS: ");
-            for (int i = 0; i < hasil.Length/2; i++)
-            {
-                // Console.Write("[" + hasil[i, 0] + "," + hasil[i, 1] + "], ");
-            }
+            // for (int i = 0; i < hasil.Length/2; i++)
+            // {
+            //     // Console.Write("[" + hasil[i, 0] + "," + hasil[i, 1] + "], ");
+            // }
+
+            Console.WriteLine("nodes = " + nodes);
+            
             return hasil;
         }
     }
