@@ -56,6 +56,8 @@ public class Program
         string hasilJalan = aaa.printStep(jalan);
         Console.WriteLine("arah: "+ hasilJalan);
 
+        Console.WriteLine("node: " + jalan[(jalan.Length/2) - 1,0]);
+
         Console.WriteLine("done!"); Console.ReadLine();
         Console.WriteLine();
         
